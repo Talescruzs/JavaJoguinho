@@ -11,6 +11,7 @@ public class Main {
             System.out.println("Tamanho Y: " + dino1.getTamy());
             System.out.println("Imagem: " + dino1.getImg());
             System.out.println("Ataque forte - Dano: " + dino1.getAtaques().get("forte").getDano());
+            System.out.println("Ataque fraco - Dano: " + dino1.getAtaques().get("fraco").getDano());
         } catch (Exception e) {
             e.printStackTrace();
         }

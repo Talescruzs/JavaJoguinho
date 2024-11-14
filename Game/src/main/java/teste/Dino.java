@@ -1,4 +1,6 @@
 package teste;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
 import java.io.IOException;
@@ -27,11 +29,34 @@ public class Dino {
     private String img;
     private Map<String, Ataque> ataques;
 
+    @JsonCreator
+    private Dino(
+        @JsonProperty("id") int id,
+        @JsonProperty("tamx") int tamx,
+        @JsonProperty("tamy") int tamy,
+        @JsonProperty("img") String img
+    ) {
+        this.id = id;
+        this.tamx = tamx;
+        this.tamy = tamy;
+        this.img = img;
+    }
+
+    // @Override
+    // public String toString() {
+    //     return "Dino{" +
+    //             "id=" + id +
+    //             ", tamx=" + tamx +
+    //             ", tamy=" + tamy +
+    //             ", img='" + img + '\'' +
+    //             '}';
+    // }
+
     // Construtor que inicializa o Dino com base no ID
     public Dino(int id) {
         try {
             // Caminho para o arquivo JSON
-            File file = new File("../resources/Dinos.json");
+            File file = new File("Game/src/main/java/teste/dinos.json");
 
             // Criar o ObjectMapper
             ObjectMapper objectMapper = new ObjectMapper();

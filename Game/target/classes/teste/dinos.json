@@ -16,5 +16,23 @@
                 "velocidade":1
             }
         }
+    },
+    "dino2":{
+        "id":2,
+        "tamx":100,
+        "tamy":100,
+        "img":"../Img2",
+        "ataques":{
+            "forte":{
+                "dano":5,
+                "alcance":10,
+                "velocidade":2
+            },
+            "fraco":{
+                "dano":2,
+                "alcance":5,
+                "velocidade":1
+            }
+        }
     }
 }
