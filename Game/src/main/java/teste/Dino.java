@@ -26,7 +26,8 @@ public class Dino {
     private int id;
     private int tamx;
     private int tamy;
-    private String img;
+    private String img1;
+    private String img2;
     private Map<String, Ataque> ataques;
 
     @JsonCreator
@@ -34,12 +35,14 @@ public class Dino {
         @JsonProperty("id") int id,
         @JsonProperty("tamx") int tamx,
         @JsonProperty("tamy") int tamy,
-        @JsonProperty("img") String img
+        @JsonProperty("img1") String img1,
+        @JsonProperty("img2") String img2
     ) {
         this.id = id;
         this.tamx = tamx;
         this.tamy = tamy;
-        this.img = img;
+        this.img1 = img1;
+        this.img2 = img2;
     }
 
     // @Override
@@ -56,7 +59,7 @@ public class Dino {
     public Dino(int id) {
         try {
             // Caminho para o arquivo JSON
-            File file = new File("Game/src/main/java/teste/dinos.json");
+            File file = new File("Game/src/main/resources/json/dinos.json");
 
             // Criar o ObjectMapper
             ObjectMapper objectMapper = new ObjectMapper();
@@ -75,7 +78,8 @@ public class Dino {
             this.id = dino.id;
             this.tamx = dino.tamx;
             this.tamy = dino.tamy;
-            this.img = dino.img;
+            this.img1 = dino.img1;
+            this.img2 = dino.img2;
             this.ataques = dino.ataques;
 
         } catch (Exception e) {
@@ -88,6 +92,7 @@ public class Dino {
     public int getId() { return id; }
     public int getTamx() { return tamx; }
     public int getTamy() { return tamy; }
-    public String getImg() { return img; }
+    public String getImg1() { return img1; }
+    public String getImg2() { return img2; }
     public Map<String, Ataque> getAtaques() { return ataques; }
 }

@@ -1,0 +1,31 @@
+{
+    "Quarta Colônia":{
+        "id":1,
+        "questoes":{
+            "1":{
+                "questao":"Somos uma iniciativa da Universidade Federal de Santa Maria (UFSM) em parceria com o Consórcio Intermunicipal de Desenvolvimento Sustentável de uma cidade gaúcha",
+                "resposta":"Geoparque Quarta Colônia"
+            },
+            "2":{
+                "questao":"Somos formados por nove municípios: Agudo, Dona Francisca, Faxinal do Soturno, Ivorá, Nova Palma, Pinhal Grande, Restinga Seca, São João do Polêsine e Silveira Martins",
+                "resposta":"Geoparque Quarta Colônia"
+            }
+        },
+        "personagens":[1,2,3],
+        "imagem":"Game/src/main/resources/img/QuartaColonia.jpg"
+    },
+    "Gare da estação":{
+        "id":2,
+        "questoes":{
+            "1":{
+                "questao":"Somos uma iniciativa da Universidade Federal de Santa Maria (UFSM) em parceria com o Consórcio Intermunicipal de Desenvolvimento Sustentável de uma cidade gaúcha",
+                "resposta":"Geoparque Quarta Colônia"
+            },
+            "2":{
+                "questao":"Somos formados por nove municípios: Agudo, Dona Francisca, Faxinal do Soturno, Ivorá, Nova Palma, Pinhal Grande, Restinga Seca, São João do Polêsine e Silveira Martins",
+                "resposta":"Geoparque Quarta Colônia"
+            }
+        },
+        "personagens":[1,2,3]
+    }
+}
