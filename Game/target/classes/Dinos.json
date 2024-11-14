@@ -1,0 +1,20 @@
+{
+    "dino1":{
+        "id":1,
+        "tamx":100,
+        "tamy":100,
+        "img":"../Img",
+        "ataques":{
+            "forte":{
+                "dano":5,
+                "alcance":10,
+                "velocidade":2
+            },
+            "fraco":{
+                "dano":2,
+                "alcance":5,
+                "velocidade":1
+            }
+        }
+    }
+}
