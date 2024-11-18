@@ -3,8 +3,8 @@
         "id":1,
         "tamx":100,
         "tamy":100,
-        "img1":".Game/src/main/resources/img/bagualossauro1",
-        "img2":".Game/src/main/resources/img/bagualossauro2",
+        "img1":"Game/src/main/resources/img/Bagualossauro1.jpeg",
+        "img2":"Game/src/main/resources/img/Bagualossauro2.jpg",
         "ataques":{
             "forte":{
                 "dano":5,

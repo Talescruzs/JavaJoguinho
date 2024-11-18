@@ -24,8 +24,9 @@ class Ataque {
 
 public class Dino {
     private int id;
-    private int tamx;
-    private int tamy;
+    private int tamx, tamy;
+    private int esq, dir;
+    private float posx, posy; 
     private String img1;
     private String img2;
     private Map<String, Ataque> ataques;
@@ -45,18 +46,8 @@ public class Dino {
         this.img2 = img2;
     }
 
-    // @Override
-    // public String toString() {
-    //     return "Dino{" +
-    //             "id=" + id +
-    //             ", tamx=" + tamx +
-    //             ", tamy=" + tamy +
-    //             ", img='" + img + '\'' +
-    //             '}';
-    // }
-
     // Construtor que inicializa o Dino com base no ID
-    public Dino(int id) {
+    public Dino(int id, float posx, float posy) {
         try {
             // Caminho para o arquivo JSON
             File file = new File("Game/src/main/resources/json/dinos.json");
@@ -81,10 +72,37 @@ public class Dino {
             this.img1 = dino.img1;
             this.img2 = dino.img2;
             this.ataques = dino.ataques;
+            this.posx = posx;
+            this.posy = posy;
+            this.esq = 0;
+            this.dir = 0;
 
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException("Erro ao inicializar o Dino com ID " + id, e);
+        }
+    }
+
+    public void move(){
+        if(this.esq == 1){
+            this.move_esq();
+        }
+        if(this.dir == 1){
+            this.move_dir();
+        }
+    }
+
+    private void move_esq(){
+        this.posx -= 5;
+        if(this.posx < 0){
+            this.posx = 0;
+        }
+    }
+
+    private void move_dir(){
+        this.posx += 5;
+        if(this.posx > 1000){
+            this.posx = 1000;
         }
     }
 
@@ -95,4 +113,25 @@ public class Dino {
     public String getImg1() { return img1; }
     public String getImg2() { return img2; }
     public Map<String, Ataque> getAtaques() { return ataques; }
+    public Float getPx() { return this.posx; }
+    public Float getPy() { return this.posy; }
+
+    public void changeEsq(){
+        if(this.esq == 0){
+            this.esq = 1;
+        }
+        else{
+            this.esq = 0;
+        }
+    }
+    
+    public void changeDir(){
+        if(this.dir == 0){
+            this.dir = 1;
+        }
+        else{
+            this.dir = 0;
+        }
+    }
+
 }
