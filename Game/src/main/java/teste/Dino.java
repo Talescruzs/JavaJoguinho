@@ -26,7 +26,8 @@ public class Dino {
     private int id;
     private int tamx, tamy;
     private int esq, dir;
-    private float posx, posy; 
+    private float posx, posy, posyBase; 
+    private double dy;
     private String img1;
     private String img2;
     private Map<String, Ataque> ataques;
@@ -74,9 +75,10 @@ public class Dino {
             this.ataques = dino.ataques;
             this.posx = posx;
             this.posy = posy;
+            this.posyBase = posy;
             this.esq = 0;
             this.dir = 0;
-
+            this.dy = 0;
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException("Erro ao inicializar o Dino com ID " + id, e);
@@ -90,6 +92,7 @@ public class Dino {
         if(this.dir == 1){
             this.move_dir();
         }
+        gravity();
     }
 
     private void move_esq(){
@@ -103,6 +106,21 @@ public class Dino {
         this.posx += 5;
         if(this.posx > 1000){
             this.posx = 1000;
+        }
+    }
+
+    private void gravity(){
+        this.posy += this.dy;
+        this.dy -= 0.1;
+        if(this.posy < this.posyBase){
+            this.posy = this.posyBase;
+            this.dy = 0;
+        }
+    }
+
+    public void jump(){
+        if(this.posy == this.posyBase){
+            this.dy = 5;
         }
     }
 

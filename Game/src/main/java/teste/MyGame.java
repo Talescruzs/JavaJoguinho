@@ -89,11 +89,17 @@ public class MyGame extends ApplicationAdapter implements InputProcessor {
             case Input.Keys.RIGHT:
                 p2.changeDir();
                 break;
+            case Input.Keys.UP:
+                p2.jump();
+                break;
             case Input.Keys.A:
                 p1.changeEsq();
                 break;
             case Input.Keys.D:
                 p1.changeDir();
+                break;
+            case Input.Keys.W:
+                p1.jump();
                 break;
         }
         return true;
