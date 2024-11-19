@@ -9,6 +9,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import teste.Dino;
+import teste.Locais;
 
 
 
@@ -16,45 +17,22 @@ import teste.Dino;
 public class MyGame extends ApplicationAdapter implements InputProcessor {
     private SpriteBatch batch;
     private BitmapFont font;
-    private String fundo;
-    private Texture imageFundo;
+    private String menuFundo, fundo, bolinha;
+    private Texture imageMenuFundo, imageFundo, imageBolinha;
     private Dino p1, p2;
     private Texture imageP1, imageP2;
+    private int stage = 0;
 
     public MyGame(String fundo, int id1){
         this.fundo = fundo;
+        this.menuFundo = "Game/src/main/resources/img/mapaMenu.jpg";
+        this.bolinha = "Game/src/main/resources/img/bolinha(1).png";
+        
         this.p1 = new Dino(id1, 0, 0);
         this.p2 = new Dino(id1, 0, 0);
     }
 
-    @Override
-    public void create() {
-        // Inicializa o objeto para renderizar imagens e texto
-        batch = new SpriteBatch();
-
-        // Cria uma fonte padrão
-        font = new BitmapFont(); // Usa a fonte padrão embutida no libGDX
-
-        imageFundo = new Texture(Gdx.files.internal(this.fundo));
-
-        imageP1 = new Texture(Gdx.files.internal(this.p1.getImg1()));
-
-        imageP2 = new Texture(Gdx.files.internal(this.p2.getImg2()));
-        
-        font.getData().setScale(2); // Aumenta o tamanho da fonte
-
-        Gdx.input.setInputProcessor(this);
-    }
-
-    @Override
-    public void render() {
-        // Limpa a tela
-        Gdx.gl.glClearColor(0, 0, 0, 1); // Define a cor de fundo (preto)
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-        // Inicia o processo de desenho
-        batch.begin();
-
+    private void pvp(){
         p1.move();
         p2.move();
 
@@ -80,6 +58,52 @@ public class MyGame extends ApplicationAdapter implements InputProcessor {
                        -this.p2.getTamx(), // Largura negativa espelha no eixo Y
                        this.p2.getTamy());
         }
+    }
+
+    private void menu(){
+        batch.draw(imageMenuFundo, 250, 0);
+        batch.draw(imageBolinha, 725, 425); // quarta colonia
+        batch.draw(imageBolinha, 625, 600); // missões
+        batch.draw(imageBolinha, 1125, 525); // torres
+    }
+
+    @Override
+    public void create() {
+        // Inicializa o objeto para renderizar imagens e texto
+        batch = new SpriteBatch();
+
+        // Cria uma fonte padrão
+        font = new BitmapFont(); // Usa a fonte padrão embutida no libGDX
+
+        imageFundo = new Texture(Gdx.files.internal(this.fundo));
+        imageMenuFundo = new Texture(Gdx.files.internal(this.menuFundo));
+        imageBolinha = new Texture(Gdx.files.internal(this.bolinha));
+
+        imageP1 = new Texture(Gdx.files.internal(this.p1.getImg1()));
+
+        imageP2 = new Texture(Gdx.files.internal(this.p2.getImg2()));
+        
+        font.getData().setScale(2); // Aumenta o tamanho da fonte
+
+        Gdx.input.setInputProcessor(this);
+    }
+
+    @Override
+    public void render() {
+        // Limpa a tela
+        Gdx.gl.glClearColor(0, 0, 0, 1); // Define a cor de fundo (preto)
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        // Inicia o processo de desenho
+        batch.begin();
+
+        if(this.stage == 0){
+            menu();
+        }
+
+        if(this.stage == 1){
+            pvp();
+        }
 
         // Escreve texto na posição (200, 300)
         font.draw(batch, "Olá, Mundo!", 200, 300);
@@ -94,6 +118,7 @@ public class MyGame extends ApplicationAdapter implements InputProcessor {
         batch.dispose();
         font.dispose();
         imageFundo.dispose();
+        imageMenuFundo.dispose();
         imageP1.dispose();
         imageP2.dispose();
     }
@@ -151,6 +176,22 @@ public class MyGame extends ApplicationAdapter implements InputProcessor {
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         // Imprime as coordenadas do clique
         System.out.println("Clique em: X=" + screenX + " Y=" + screenY);
+        // if(screenX>=100 && screenX<=500 && screenY>=100 && screenY<=500 && stage == 0){
+        //     this.stage = 1;
+        // }
+
+        if(screenX>=725 && screenX<=775 && screenY<=(837-425) && screenY>=(837-475) && stage == 0){
+            System.out.println("Quarta Colonia");
+            this.stage = 1;
+        }
+        else if(screenX>=625 && screenX<=675 && screenY<=(837-600) && screenY>=(837-650) && stage == 0){
+            System.out.println("Missões");
+            this.stage = 1;
+        }
+        else if(screenX>=1125 && screenX<=1175 && screenY<=(837-525) && screenY>=(837-575) && stage == 0){
+            System.out.println("Torres");
+            this.stage = 1;
+        }
 
         // // Atualiza a posição da imagem para o local do clique
         // imageX = screenX - image.getWidth() / 2;

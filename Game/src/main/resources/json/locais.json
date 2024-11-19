@@ -1,31 +1,42 @@
 {
-    "Quarta Colônia":{
-        "id":1,
-        "questoes":{
-            "1":{
-                "questao":"Somos uma iniciativa da Universidade Federal de Santa Maria (UFSM) em parceria com o Consórcio Intermunicipal de Desenvolvimento Sustentável de uma cidade gaúcha",
-                "resposta":"Geoparque Quarta Colônia"
-            },
-            "2":{
-                "questao":"Somos formados por nove municípios: Agudo, Dona Francisca, Faxinal do Soturno, Ivorá, Nova Palma, Pinhal Grande, Restinga Seca, São João do Polêsine e Silveira Martins",
-                "resposta":"Geoparque Quarta Colônia"
-            }
+    "locais": [
+        {
+            "nome": "Quarta Colônia",
+            "id": 1,
+            "imagens": [
+                "Game/src/main/resources/img/QuartaColonia.jpg",
+                "Game/src/main/resources/img/QuartaColonia.jpg"
+            ],
+            "personagens": [1, 2, 3],
+            "questoes": [
+                {
+                    "pergunta": "Somos uma iniciativa da Universidade Federal de Santa Maria (UFSM) em parceria com o Consórcio Intermunicipal de Desenvolvimento Sustentável de uma cidade gaúcha",
+                    "resposta": "Geoparque Quarta Colônia"
+                },
+                {
+                    "pergunta": "Somos formados por nove municípios: Agudo, Dona Francisca, Faxinal do Soturno, Ivorá, Nova Palma, Pinhal Grande, Restinga Seca, São João do Polêsine e Silveira Martins",
+                    "resposta": "Geoparque Quarta Colônia"
+                }
+            ]
         },
-        "personagens":[1,2,3],
-        "imagem":"Game/src/main/resources/img/QuartaColonia.jpg"
-    },
-    "Gare da estação":{
-        "id":2,
-        "questoes":{
-            "1":{
-                "questao":"Somos uma iniciativa da Universidade Federal de Santa Maria (UFSM) em parceria com o Consórcio Intermunicipal de Desenvolvimento Sustentável de uma cidade gaúcha",
-                "resposta":"Geoparque Quarta Colônia"
-            },
-            "2":{
-                "questao":"Somos formados por nove municípios: Agudo, Dona Francisca, Faxinal do Soturno, Ivorá, Nova Palma, Pinhal Grande, Restinga Seca, São João do Polêsine e Silveira Martins",
-                "resposta":"Geoparque Quarta Colônia"
-            }
-        },
-        "personagens":[1,2,3]
-    }
+        {
+            "nome": "Gare da estação",
+            "id": 2,
+            "imagens": [
+                "Game/src/main/resources/img/Gare.jpg",
+                "Game/src/main/resources/img/Gare.jpg"
+            ],
+            "personagens": [4, 5, 6],
+            "questoes": [
+                {
+                    "pergunta": "Qual é o local de chegada dos trens em Santa Maria, que hoje é um importante ponto histórico e cultural?",
+                    "resposta": "Gare da estação"
+                },
+                {
+                    "pergunta": "Qual local abriga eventos e exposições em Santa Maria, mantendo viva a memória ferroviária da cidade?",
+                    "resposta": "Gare da estação"
+                }
+            ]
+        }
+    ]
 }
