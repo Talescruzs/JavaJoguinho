@@ -59,8 +59,27 @@ public class MyGame extends ApplicationAdapter implements InputProcessor {
         p2.move();
 
         batch.draw(imageFundo, 0, 0);
-        batch.draw(imageP1, this.p1.getPx(), this.p1.getPy());
-        batch.draw(imageP2, this.p2.getPx(), this.p2.getPy());
+        // batch.draw(imageP1, this.p1.getPx(), this.p1.getPy());
+        // batch.draw(imageP2, this.p2.getPx(), this.p2.getPy());
+        if (this.p1.whereGo() == 1) {
+            batch.draw(imageP1, this.p1.getPx(), this.p1.getPy(), this.p1.getTamx(), this.p1.getTamy());
+        } else {
+            batch.draw(imageP1, 
+                       this.p1.getPx() + this.p1.getTamx(), // Ajusta a posição para espelhar
+                       this.p1.getPy(), 
+                       -this.p1.getTamx(), // Largura negativa espelha no eixo Y
+                       this.p1.getTamy());
+        }
+
+        if (this.p2.whereGo() == 1) {
+            batch.draw(imageP2, this.p2.getPx(), this.p2.getPy(), this.p2.getTamx(), this.p2.getTamy());
+        } else {
+            batch.draw(imageP2, 
+                       this.p2.getPx() + this.p2.getTamx(), // Ajusta a posição para espelhar
+                       this.p2.getPy(), 
+                       -this.p2.getTamx(), // Largura negativa espelha no eixo Y
+                       this.p2.getTamy());
+        }
 
         // Escreve texto na posição (200, 300)
         font.draw(batch, "Olá, Mundo!", 200, 300);

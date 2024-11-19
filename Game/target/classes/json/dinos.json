@@ -1,10 +1,10 @@
 {
     "dino1":{
         "id":1,
-        "tamx":100,
-        "tamy":100,
-        "img1":"Game/src/main/resources/img/Bagualossauro1.jpeg",
-        "img2":"Game/src/main/resources/img/Bagualossauro2.jpg",
+        "tamx":742,
+        "tamy":409,
+        "img1":"Game/src/main/resources/img/Bagualossauro1.png",
+        "img2":"Game/src/main/resources/img/Bagualossauro2.png",
         "ataques":{
             "forte":{
                 "dano":5,

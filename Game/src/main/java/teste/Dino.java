@@ -25,9 +25,9 @@ class Ataque {
 public class Dino {
     private int id;
     private int tamx, tamy;
-    private int esq, dir;
+    private int esq = 0, dir = 0, whereG = 0;
     private float posx, posy, posyBase; 
-    private double dy;
+    private double dy = 0.0;
     private String img1;
     private String img2;
     private Map<String, Ataque> ataques;
@@ -76,9 +76,6 @@ public class Dino {
             this.posx = posx;
             this.posy = posy;
             this.posyBase = posy;
-            this.esq = 0;
-            this.dir = 0;
-            this.dy = 0;
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException("Erro ao inicializar o Dino com ID " + id, e);
@@ -133,6 +130,16 @@ public class Dino {
     public Map<String, Ataque> getAtaques() { return ataques; }
     public Float getPx() { return this.posx; }
     public Float getPy() { return this.posy; }
+    
+    public int whereGo(){
+        if(this.dir == 1){
+            this.whereG = 0;
+        }
+        if(this.esq == 1){
+            this.whereG = 1;
+        }
+        return this.whereG;
+    }
 
     public void changeEsq(){
         if(this.esq == 0){
