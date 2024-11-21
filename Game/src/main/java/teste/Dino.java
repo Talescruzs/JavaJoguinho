@@ -1,4 +1,7 @@
 package teste;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -6,6 +9,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import teste.Animation;
 
 class Ataque {
     private int dano;
@@ -31,6 +35,8 @@ public class Dino {
     private String img1;
     private String img2;
     private Map<String, Ataque> ataques;
+    private Animation animation;
+    private Texture imagem;
 
     @JsonCreator
     private Dino(
@@ -66,6 +72,8 @@ public class Dino {
                     .findFirst()
                     .orElseThrow(() -> new IllegalArgumentException("Dino com ID " + id + " não encontrado!"));
 
+
+
             // Inicializar os atributos do Dino atual com os valores do JSON
             this.id = dino.id;
             this.tamx = dino.tamx;
@@ -76,6 +84,9 @@ public class Dino {
             this.posx = posx;
             this.posy = posy;
             this.posyBase = posy;
+            this.imagem = new Texture(Gdx.files.internal(dino.img1));
+            this.animation = new Animation(new TextureRegion(this.imagem), 2, 5f);
+
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException("Erro ao inicializar o Dino com ID " + id, e);
@@ -85,9 +96,11 @@ public class Dino {
     public void move(){
         if(this.esq == 1){
             this.move_esq();
+            this.animation.update(esq);
         }
         if(this.dir == 1){
             this.move_dir();
+            this.animation.update(dir);
         }
         gravity();
     }
@@ -130,6 +143,7 @@ public class Dino {
     public Map<String, Ataque> getAtaques() { return ataques; }
     public Float getPx() { return this.posx; }
     public Float getPy() { return this.posy; }
+    public TextureRegion getFrame(){return this.animation.getFrame();}
     
     public int whereGo(){
         if(this.dir == 1){

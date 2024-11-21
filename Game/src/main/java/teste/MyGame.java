@@ -3,6 +3,7 @@ package teste;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.Gdx;
@@ -21,15 +22,14 @@ public class MyGame extends ApplicationAdapter implements InputProcessor {
     private Texture imageMenuFundo, imageFundo, imageBolinha;
     private Dino p1, p2;
     private Texture imageP1, imageP2;
+    private TextureRegion teste;
     private int stage = 0;
 
-    public MyGame(String fundo, int id1){
+    public MyGame(String fundo){
         this.fundo = fundo;
         this.menuFundo = "Game/src/main/resources/img/mapaMenu.jpg";
         this.bolinha = "Game/src/main/resources/img/bolinha(1).png";
         
-        this.p1 = new Dino(id1, 0, 0);
-        this.p2 = new Dino(id1, 0, 0);
     }
 
     private void pvp(){
@@ -48,11 +48,11 @@ public class MyGame extends ApplicationAdapter implements InputProcessor {
                        -this.p1.getTamx(), // Largura negativa espelha no eixo Y
                        this.p1.getTamy());
         }
-
+        this.teste = p2.getFrame();
         if (this.p2.whereGo() == 1) {
-            batch.draw(imageP2, this.p2.getPx(), this.p2.getPy(), this.p2.getTamx(), this.p2.getTamy());
+            batch.draw(teste, this.p2.getPx(), this.p2.getPy(), this.p2.getTamx(), this.p2.getTamy());
         } else {
-            batch.draw(imageP2, 
+            batch.draw(teste, 
                        this.p2.getPx() + this.p2.getTamx(), // Ajusta a posição para espelhar
                        this.p2.getPy(), 
                        -this.p2.getTamx(), // Largura negativa espelha no eixo Y
@@ -75,9 +75,14 @@ public class MyGame extends ApplicationAdapter implements InputProcessor {
         // Cria uma fonte padrão
         font = new BitmapFont(); // Usa a fonte padrão embutida no libGDX
 
+        this.p1 = new Dino(1, 0, 0);
+        this.p2 = new Dino(1, 0, 0);
+
         imageFundo = new Texture(Gdx.files.internal(this.fundo));
         imageMenuFundo = new Texture(Gdx.files.internal(this.menuFundo));
         imageBolinha = new Texture(Gdx.files.internal(this.bolinha));
+
+        
 
         imageP1 = new Texture(Gdx.files.internal(this.p1.getImg1()));
 
