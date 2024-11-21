@@ -85,7 +85,7 @@ public class Dino {
             this.posy = posy;
             this.posyBase = posy;
             this.imagem = new Texture(Gdx.files.internal(dino.img1));
-            this.animation = new Animation(new TextureRegion(this.imagem), 2, 5f);
+            this.animation = new Animation(new TextureRegion(this.imagem), 2, 10f);
 
         } catch (Exception e) {
             e.printStackTrace();
