@@ -11,75 +11,67 @@ import com.badlogic.gdx.InputProcessor;
 import java.util.ArrayList;
 
 public class MyGame extends ApplicationAdapter implements InputProcessor {
-    private SpriteBatch batch;
     private BitmapFont font;
-    private String fundo, bolinha;
-    private Texture imageFundo, imageBolinha;
+    private String fundo;
+    private Texture imageFundo;
     private Dino p1, p2;
-    private Texture imageP1, imageP2;
     private int stage = 0;
-    private GameUtils util;
+    private GameDraw gameDraw;
+    private GameIO gameIO;
     private Locais local;
+    private Integer tamx, tamy;
 
-    public MyGame(int id1){
+    public MyGame(int id1, int tamx, int tamy){
         this.fundo = "Game/src/main/resources/img/mapaMenu.jpg";
-        this.bolinha = "Game/src/main/resources/img/bolinha(1).png";
+        this.tamx = tamx;
+        this.tamy = tamy;
     }
 
     private void pvp(){
         p1.move();
         p2.move();
 
-        util.setFundo(imageFundo);
-        util.drawFundo(0, 0);
-
-        util.drawP();
+        gameDraw.setFundo(imageFundo, 0, 0);
+        gameDraw.draw();
     }
 
     private void menu(){
-        util.setFundo(imageFundo);
-        util.drawFundo(250, 0);
-        batch.begin();
-        batch.draw(imageBolinha, 725, 425); // quarta colonia
-        batch.draw(imageBolinha, 625, 600); // missões
-        batch.draw(imageBolinha, 1125, 525); // torres
-        batch.end();
+        gameDraw.setFundo(imageFundo, 250, 0);
+        gameDraw.draw();
     }
     
     private void detalhes(){
-        util.setFundo(imageFundo);
-        util.drawFundo(0, 100);
-
-        batch.begin();
-        batch.draw(imageBolinha, 725, 425); // quarta colonia
-        batch.draw(imageBolinha, 625, 600); // missões
-        batch.draw(imageBolinha, 1125, 525); // torres
-        batch.end();
+        gameDraw.setFundo(imageFundo, 0, 100);
+        gameDraw.draw();
     }
 
     @Override
     public void create() {
-        // Inicializa o objeto para renderizar imagens e texto
-        batch = new SpriteBatch();
 
         // Cria uma fonte padrão
         font = new BitmapFont(); // Usa a fonte padrão embutida no libGDX
 
+        imageFundo = new Texture(Gdx.files.internal(this.fundo));
+
+
         this.p1 = new Dino(1, 0, 0);
         this.p2 = new Dino(1, 0, 0);
-
         ArrayList<Dino> dinos = new ArrayList<>();
         dinos.add(this.p1); // Primeiro Dino
         dinos.add(this.p2); // Segundo Dino
 
-        imageFundo = new Texture(Gdx.files.internal(this.fundo));
-        imageBolinha = new Texture(Gdx.files.internal(this.bolinha));
-        this.util = new GameUtils(imageFundo, dinos);
+        ArrayList<Bolinha> bolinhas = new ArrayList<>();
+        Bolinha bolinha = new Bolinha(725, 425, 1);
+        bolinhas.add(bolinha);
+        bolinha = new Bolinha(625, 600, 2);
+        bolinhas.add(bolinha);
+        bolinha = new Bolinha(1125, 525, 3);
+        bolinhas.add(bolinha);
 
-        imageP1 = new Texture(Gdx.files.internal(this.p1.getImg1()));
 
-        imageP2 = new Texture(Gdx.files.internal(this.p2.getImg2()));
-        
+        this.gameDraw = new GameDraw(imageFundo, dinos, bolinhas);
+        this.gameIO = new GameIO(this.tamx, this.tamy, bolinhas);
+
         font.getData().setScale(2); // Aumenta o tamanho da fonte
 
         Gdx.input.setInputProcessor(this);
@@ -91,20 +83,21 @@ public class MyGame extends ApplicationAdapter implements InputProcessor {
         Gdx.gl.glClearColor(0, 0, 0, 1); // Define a cor de fundo (preto)
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        // Inicia o processo de desenho
-
         if(this.stage == 0){
             imageFundo = new Texture(Gdx.files.internal(this.fundo));
+            gameDraw.goMenu();
             menu();
         }
         
         if(this.stage == 1){
             imageFundo = new Texture(Gdx.files.internal(this.local.getImagens().get(0)));
+            gameDraw.goLocal();
             detalhes();
         }
 
         if(this.stage == 2){
             imageFundo = new Texture(Gdx.files.internal(this.local.getImagens().get(1)));
+            gameDraw.goBattle();
             pvp();
         }
 
@@ -113,11 +106,8 @@ public class MyGame extends ApplicationAdapter implements InputProcessor {
     @Override
     public void dispose() {
         // Libera os recursos
-        batch.dispose();
         font.dispose();
         imageFundo.dispose();
-        imageP1.dispose();
-        imageP2.dispose();
     }
 
     @Override
@@ -171,11 +161,6 @@ public class MyGame extends ApplicationAdapter implements InputProcessor {
     }
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        // Imprime as coordenadas do clique
-        System.out.println("Clique em: X=" + screenX + " Y=" + screenY);
-        // if(screenX>=100 && screenX<=500 && screenY>=100 && screenY<=500 && stage == 0){
-        //     this.stage = 1;
-        // }
 
         if(screenX>=725 && screenX<=775 && screenY<=(837-425) && screenY>=(837-475) && stage == 1){
             System.out.println("Quarta Colonia");
@@ -183,27 +168,11 @@ public class MyGame extends ApplicationAdapter implements InputProcessor {
             this.stage = 2;
         }
 
-        if(screenX>=725 && screenX<=775 && screenY<=(837-425) && screenY>=(837-475) && stage == 0){
-            System.out.println("Quarta Colonia");
-            this.local = new Locais(1);
+        Integer idLocal = gameIO.bolinhaMenuClick(screenX, screenY);
+        if(idLocal != 0){
+            this.local = new Locais(idLocal);
             this.stage = 1;
         }
-        else if(screenX>=625 && screenX<=675 && screenY<=(837-600) && screenY>=(837-650) && stage == 0){
-            System.out.println("Missões");
-            this.local = new Locais(2);
-            this.stage = 1;
-        }
-        else if(screenX>=1125 && screenX<=1175 && screenY<=(837-525) && screenY>=(837-575) && stage == 0){
-            System.out.println("Torres");
-            this.local = new Locais(3);
-            this.stage = 1;
-        }
-
-        
-
-        // // Atualiza a posição da imagem para o local do clique
-        // imageX = screenX - image.getWidth() / 2;
-        // imageY = Gdx.graphics.getHeight() - screenY - image.getHeight() / 2; // Ajusta eixo Y
 
         return true;
     }

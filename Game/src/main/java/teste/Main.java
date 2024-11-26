@@ -10,6 +10,6 @@ public class Main {
         config.width = 1600;
         config.height = 837;
 
-        new LwjglApplication(new MyGame(1), config);
+        new LwjglApplication(new MyGame(1, 1600, 837), config);
     }
 }
