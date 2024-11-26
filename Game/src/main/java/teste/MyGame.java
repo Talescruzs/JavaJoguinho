@@ -17,15 +17,15 @@ import teste.Locais;
 public class MyGame extends ApplicationAdapter implements InputProcessor {
     private SpriteBatch batch;
     private BitmapFont font;
-    private String menuFundo, fundo, bolinha;
+    private String fundo, bolinha;
     private Texture imageMenuFundo, imageFundo, imageBolinha;
     private Dino p1, p2;
     private Texture imageP1, imageP2;
     private int stage = 0;
+    private Locais local;
 
-    public MyGame(String fundo, int id1){
-        this.fundo = fundo;
-        this.menuFundo = "Game/src/main/resources/img/mapaMenu.jpg";
+    public MyGame(int id1){
+        this.fundo = "Game/src/main/resources/img/mapaMenu.jpg";
         this.bolinha = "Game/src/main/resources/img/bolinha(1).png";
         
         this.p1 = new Dino(id1, 0, 0);
@@ -61,7 +61,14 @@ public class MyGame extends ApplicationAdapter implements InputProcessor {
     }
 
     private void menu(){
-        batch.draw(imageMenuFundo, 250, 0);
+        batch.draw(imageFundo, 250, 0);
+        batch.draw(imageBolinha, 725, 425); // quarta colonia
+        batch.draw(imageBolinha, 625, 600); // missões
+        batch.draw(imageBolinha, 1125, 525); // torres
+    }
+    
+    private void detalhes(){
+        batch.draw(imageFundo, 250, 0);
         batch.draw(imageBolinha, 725, 425); // quarta colonia
         batch.draw(imageBolinha, 625, 600); // missões
         batch.draw(imageBolinha, 1125, 525); // torres
@@ -75,8 +82,6 @@ public class MyGame extends ApplicationAdapter implements InputProcessor {
         // Cria uma fonte padrão
         font = new BitmapFont(); // Usa a fonte padrão embutida no libGDX
 
-        imageFundo = new Texture(Gdx.files.internal(this.fundo));
-        imageMenuFundo = new Texture(Gdx.files.internal(this.menuFundo));
         imageBolinha = new Texture(Gdx.files.internal(this.bolinha));
 
         imageP1 = new Texture(Gdx.files.internal(this.p1.getImg1()));
@@ -98,10 +103,17 @@ public class MyGame extends ApplicationAdapter implements InputProcessor {
         batch.begin();
 
         if(this.stage == 0){
+            imageFundo = new Texture(Gdx.files.internal(this.fundo));
             menu();
         }
-
+        
         if(this.stage == 1){
+            // imageMenuFundo = new Texture(Gdx.files.internal(this.local.getImagens().get(0)));
+            imageFundo = new Texture(Gdx.files.internal(this.local.getImagens().get(0)));
+            detalhes();
+        }
+
+        if(this.stage == 2){
             pvp();
         }
 
@@ -182,14 +194,17 @@ public class MyGame extends ApplicationAdapter implements InputProcessor {
 
         if(screenX>=725 && screenX<=775 && screenY<=(837-425) && screenY>=(837-475) && stage == 0){
             System.out.println("Quarta Colonia");
+            this.local = new Locais(1);
             this.stage = 1;
         }
         else if(screenX>=625 && screenX<=675 && screenY<=(837-600) && screenY>=(837-650) && stage == 0){
             System.out.println("Missões");
+            this.local = new Locais(2);
             this.stage = 1;
         }
         else if(screenX>=1125 && screenX<=1175 && screenY<=(837-525) && screenY>=(837-575) && stage == 0){
             System.out.println("Torres");
+            this.local = new Locais(3);
             this.stage = 1;
         }
 

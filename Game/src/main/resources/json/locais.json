@@ -20,11 +20,30 @@
             ]
         },
         {
-            "nome": "Gare da estação",
+            "nome": "Missões",
             "id": 2,
             "imagens": [
-                "Game/src/main/resources/img/Gare.jpg",
-                "Game/src/main/resources/img/Gare.jpg"
+                "Game/src/main/resources/img/QuartaColonia.jpg",
+                "Game/src/main/resources/img/QuartaColonia.jpg"
+            ],
+            "personagens": [4, 5, 6],
+            "questoes": [
+                {
+                    "pergunta": "Qual é o local de chegada dos trens em Santa Maria, que hoje é um importante ponto histórico e cultural?",
+                    "resposta": "Gare da estação"
+                },
+                {
+                    "pergunta": "Qual local abriga eventos e exposições em Santa Maria, mantendo viva a memória ferroviária da cidade?",
+                    "resposta": "Gare da estação"
+                }
+            ]
+        },
+        {
+            "nome": "Torres",
+            "id": 3,
+            "imagens": [
+                "Game/src/main/resources/img/QuartaColonia.jpg",
+                "Game/src/main/resources/img/QuartaColonia.jpg"
             ],
             "personagens": [4, 5, 6],
             "questoes": [
