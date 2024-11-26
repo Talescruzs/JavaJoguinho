@@ -3,6 +3,7 @@ package teste;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.Gdx;
@@ -10,6 +11,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import teste.Dino;
 import teste.Locais;
+import java.util.ArrayList;
 
 
 
@@ -21,43 +23,28 @@ public class MyGame extends ApplicationAdapter implements InputProcessor {
     private Texture imageMenuFundo, imageFundo, imageBolinha;
     private Dino p1, p2;
     private Texture imageP1, imageP2;
+    private TextureRegion teste;
     private int stage = 0;
     private Locais local;
+    private GameUtils util;
 
     public MyGame(int id1){
         this.fundo = "Game/src/main/resources/img/mapaMenu.jpg";
         this.bolinha = "Game/src/main/resources/img/bolinha(1).png";
         
-        this.p1 = new Dino(id1, 0, 0);
-        this.p2 = new Dino(id1, 0, 0);
     }
 
     private void pvp(){
         p1.move();
         p2.move();
 
+        batch.begin();
         batch.draw(imageFundo, 0, 0);
         // batch.draw(imageP1, this.p1.getPx(), this.p1.getPy());
         // batch.draw(imageP2, this.p2.getPx(), this.p2.getPy());
-        if (this.p1.whereGo() == 1) {
-            batch.draw(imageP1, this.p1.getPx(), this.p1.getPy(), this.p1.getTamx(), this.p1.getTamy());
-        } else {
-            batch.draw(imageP1, 
-                       this.p1.getPx() + this.p1.getTamx(), // Ajusta a posição para espelhar
-                       this.p1.getPy(), 
-                       -this.p1.getTamx(), // Largura negativa espelha no eixo Y
-                       this.p1.getTamy());
-        }
+        batch.end();
 
-        if (this.p2.whereGo() == 1) {
-            batch.draw(imageP2, this.p2.getPx(), this.p2.getPy(), this.p2.getTamx(), this.p2.getTamy());
-        } else {
-            batch.draw(imageP2, 
-                       this.p2.getPx() + this.p2.getTamx(), // Ajusta a posição para espelhar
-                       this.p2.getPy(), 
-                       -this.p2.getTamx(), // Largura negativa espelha no eixo Y
-                       this.p2.getTamy());
-        }
+        util.drawP();
     }
 
     private void menu(){
@@ -82,7 +69,18 @@ public class MyGame extends ApplicationAdapter implements InputProcessor {
         // Cria uma fonte padrão
         font = new BitmapFont(); // Usa a fonte padrão embutida no libGDX
 
+        this.p1 = new Dino(1, 0, 0);
+        this.p2 = new Dino(1, 0, 0);
+
+        ArrayList<Dino> dinos = new ArrayList<>();
+        dinos.add(this.p1); // Primeiro Dino
+        dinos.add(this.p2); // Segundo Dino
+        this.util = new GameUtils(imageFundo, dinos);
+
+        imageFundo = new Texture(Gdx.files.internal(this.fundo));
         imageBolinha = new Texture(Gdx.files.internal(this.bolinha));
+
+        
 
         imageP1 = new Texture(Gdx.files.internal(this.p1.getImg1()));
 
@@ -100,11 +98,12 @@ public class MyGame extends ApplicationAdapter implements InputProcessor {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         // Inicia o processo de desenho
-        batch.begin();
 
         if(this.stage == 0){
             imageFundo = new Texture(Gdx.files.internal(this.fundo));
+            batch.begin();
             menu();
+            batch.end();
         }
         
         if(this.stage == 1){
@@ -118,10 +117,9 @@ public class MyGame extends ApplicationAdapter implements InputProcessor {
         }
 
         // Escreve texto na posição (200, 300)
-        font.draw(batch, "Olá, Mundo!", 200, 300);
+        // font.draw(batch, "Olá, Mundo!", 200, 300);
 
         // Finaliza o processo de desenho
-        batch.end();
     }
 
     @Override

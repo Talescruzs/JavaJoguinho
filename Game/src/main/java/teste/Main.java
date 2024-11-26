@@ -12,5 +12,4 @@ public class Main {
         config.height = 837;
 
         new LwjglApplication(new MyGame(1), config);
-    }
 }
