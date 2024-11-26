@@ -161,6 +161,7 @@ public class MyGame extends ApplicationAdapter implements InputProcessor {
             if(idLocal != 0){
                 this.local = new Locais(idLocal);
                 this.stage = 2;
+                // this.p1 = new Dino(this.local.getPersonagem(), 0, 0);
             }
         }
         return true;

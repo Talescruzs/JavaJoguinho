@@ -23,10 +23,10 @@
             "nome": "Missões",
             "id": 2,
             "imagens": [
-                "Game/src/main/resources/img/QuartaColonia.jpg",
-                "Game/src/main/resources/img/QuartaColonia.jpg"
+                "Game/src/main/resources/img/Missoes.jpg",
+                "Game/src/main/resources/img/Missoes.jpg"
             ],
-            "personagem": 1,
+            "personagem": 2,
             "questoes": [
                 {
                     "pergunta": "Qual é o local de chegada dos trens em Santa Maria, que hoje é um importante ponto histórico e cultural?",
