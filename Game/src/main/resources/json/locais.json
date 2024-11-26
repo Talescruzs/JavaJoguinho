@@ -42,8 +42,8 @@
             "nome": "Torres",
             "id": 3,
             "imagens": [
-                "Game/src/main/resources/img/QuartaColonia.jpg",
-                "Game/src/main/resources/img/QuartaColonia.jpg"
+                "Game/src/main/resources/img/Torres.jpg",
+                "Game/src/main/resources/img/Torres.jpg"
             ],
             "personagem": 1,
             "questoes": [

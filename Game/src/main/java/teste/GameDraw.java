@@ -11,8 +11,9 @@ public class GameDraw {
     private SpriteBatch batch;
     private Integer stage;
     private Integer posFundox, posFundoy;
+    private Integer tamx, tamy;
 
-    public GameDraw(Texture fundo, ArrayList<Dino> pList, ArrayList<Bolinha> bolinhas, BtSelecionar btSelecionar) {
+    public GameDraw(Integer tamx, Integer tamy, Texture fundo, ArrayList<Dino> pList, ArrayList<Bolinha> bolinhas, BtSelecionar btSelecionar) {
         this.fundo = fundo;
         this.pList = pList;
         this.bolinhas = bolinhas;
@@ -20,15 +21,18 @@ public class GameDraw {
         this.stage = 0;
         this.posFundox = 0;
         this.posFundoy = 0;
-        
+        this.tamx = tamx;
+        this.tamy = tamy;
 
         batch = new SpriteBatch();
     }
     
-    public void setFundo(Texture fundo, Integer x, Integer y){
+    public void setFundo(Texture fundo, Integer x, Integer y, Integer tamx, Integer tamy){
         this.fundo = fundo;
         this.posFundox = x;
         this.posFundoy = y;
+        this.tamx = tamx;
+        this.tamy = tamy;
     }
 
     public void goMenu(){
@@ -44,7 +48,7 @@ public class GameDraw {
     }
 
     protected void drawFundo(){
-        batch.draw(this.fundo, this.posFundox, this.posFundoy);
+        batch.draw(this.fundo, this.posFundox, this.posFundoy, this.tamx, this.tamy);
     }
     protected void drawP(){
         for (Dino p : this.pList) {

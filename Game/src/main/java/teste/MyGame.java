@@ -27,17 +27,17 @@ public class MyGame extends ApplicationAdapter implements InputProcessor {
     private void pvp(){
         p1.move();
         p2.move();
-        gameDraw.setFundo(imageFundo, 0, 0);
+        gameDraw.setFundo(imageFundo, 0, 0, this.tamx, this.tamy);
         gameDraw.draw();
     }
 
     private void menu(){
-        gameDraw.setFundo(imageFundo, 250, 0);
+        gameDraw.setFundo(imageFundo, 250, 0, 1000, 837);
         gameDraw.draw();
     }
     
     private void detalhes(){
-        gameDraw.setFundo(imageFundo, 0, 100);
+        gameDraw.setFundo(imageFundo, 0, 100, this.tamx, this.tamy-200);
         gameDraw.draw();
     }
 
@@ -60,7 +60,7 @@ public class MyGame extends ApplicationAdapter implements InputProcessor {
         bolinha = new Bolinha(1125, 525, 3);
         bolinhas.add(bolinha);
 
-        this.gameDraw = new GameDraw(imageFundo, dinos, bolinhas, btSelecionar);
+        this.gameDraw = new GameDraw(this.tamx, this.tamy, imageFundo, dinos, bolinhas, btSelecionar);
         this.gameIO = new GameIO(this.tamx, this.tamy, bolinhas, btSelecionar);
         Gdx.input.setInputProcessor(this);
     }
@@ -142,6 +142,11 @@ public class MyGame extends ApplicationAdapter implements InputProcessor {
     }
 
     @Override
+    public boolean keyTyped(char character) {
+        // Evento ao digitar uma tecla (ex.: texto)
+        return false;
+    }
+    @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         Integer idLocal;
         if(this.stage == 0){
@@ -159,5 +164,29 @@ public class MyGame extends ApplicationAdapter implements InputProcessor {
             }
         }
         return true;
+    }
+
+    @Override
+    public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+        // Evento ao soltar o clique
+        return false;
+    }
+
+    @Override
+    public boolean touchDragged(int screenX, int screenY, int pointer) {
+        // Evento ao arrastar o mouse (se necessário)
+        return false;
+    }
+
+    @Override
+    public boolean mouseMoved(int screenX, int screenY) {
+        // Evento ao mover o mouse (se necessário)
+        return false;
+    }
+
+    @Override
+    public boolean scrolled(float amountX, float amountY) {
+        // Evento ao usar o scroll do mouse (se necessário)
+        return false;
     }
 }
