@@ -9,7 +9,7 @@ public class Locais {
     private String nome;
     private int id;
     private List<String> imagens;
-    private List<Integer> personagens;
+    private Integer personagem;
     private List<Questao> questoes;
 
     public static class Questao {
@@ -72,7 +72,7 @@ public class Locais {
             this.nome = local.nome;
             this.id = local.id;
             this.imagens = local.imagens;
-            this.personagens = local.personagens;
+            this.personagem = local.personagem;
             this.questoes = local.questoes;
 
         } catch (Exception e) {
@@ -106,12 +106,12 @@ public class Locais {
         this.imagens = imagens;
     }
 
-    public List<Integer> getPersonagens() {
-        return personagens;
+    public Integer getPersonagem() {
+        return this.personagem;
     }
 
-    public void setPersonagens(List<Integer> personagens) {
-        this.personagens = personagens;
+    public void setPersonagem(Integer personagem) {
+        this.personagem = personagem;
     }
 
     public List<Questao> getQuestoes() {

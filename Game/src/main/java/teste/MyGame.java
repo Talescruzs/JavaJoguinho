@@ -25,13 +25,12 @@ public class MyGame extends ApplicationAdapter implements InputProcessor {
     private Texture imageP1, imageP2;
     private TextureRegion teste;
     private int stage = 0;
-    private Locais local;
     private GameUtils util;
+    private Locais local;
 
     public MyGame(int id1){
         this.fundo = "Game/src/main/resources/img/mapaMenu.jpg";
         this.bolinha = "Game/src/main/resources/img/bolinha(1).png";
-        
     }
 
     private void pvp(){
@@ -109,7 +108,9 @@ public class MyGame extends ApplicationAdapter implements InputProcessor {
         if(this.stage == 1){
             // imageMenuFundo = new Texture(Gdx.files.internal(this.local.getImagens().get(0)));
             imageFundo = new Texture(Gdx.files.internal(this.local.getImagens().get(0)));
+            batch.begin();
             detalhes();
+            batch.end();
         }
 
         if(this.stage == 2){
@@ -190,6 +191,12 @@ public class MyGame extends ApplicationAdapter implements InputProcessor {
         //     this.stage = 1;
         // }
 
+        if(screenX>=725 && screenX<=775 && screenY<=(837-425) && screenY>=(837-475) && stage == 1){
+            System.out.println("Quarta Colonia");
+            this.local = new Locais(1);
+            this.stage = 2;
+        }
+
         if(screenX>=725 && screenX<=775 && screenY<=(837-425) && screenY>=(837-475) && stage == 0){
             System.out.println("Quarta Colonia");
             this.local = new Locais(1);
@@ -205,6 +212,8 @@ public class MyGame extends ApplicationAdapter implements InputProcessor {
             this.local = new Locais(3);
             this.stage = 1;
         }
+
+        
 
         // // Atualiza a posição da imagem para o local do clique
         // imageX = screenX - image.getWidth() / 2;

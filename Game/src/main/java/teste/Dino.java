@@ -121,7 +121,7 @@ public class Dino {
 
     private void gravity(){
         this.posy += this.dy;
-        this.dy -= 0.1;
+        this.dy -= 0.6;
         if(this.posy < this.posyBase){
             this.posy = this.posyBase;
             this.dy = 0;
@@ -130,7 +130,7 @@ public class Dino {
 
     public void jump(){
         if(this.posy == this.posyBase){
-            this.dy = 5;
+            this.dy = 19;
         }
     }
 
