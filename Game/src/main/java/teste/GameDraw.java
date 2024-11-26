@@ -78,4 +78,9 @@ public class GameDraw {
             drawP();
         }
     }
+
+    public void dispose(){
+        fundo.dispose();
+        batch.dispose();
+    }
 }

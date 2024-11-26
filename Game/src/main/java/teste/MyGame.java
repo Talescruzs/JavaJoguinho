@@ -3,15 +3,12 @@ package teste;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import java.util.ArrayList;
 
 public class MyGame extends ApplicationAdapter implements InputProcessor {
-    private BitmapFont font;
     private String fundo;
     private Texture imageFundo;
     private Dino p1, p2;
@@ -48,9 +45,6 @@ public class MyGame extends ApplicationAdapter implements InputProcessor {
     @Override
     public void create() {
 
-        // Cria uma fonte padrão
-        font = new BitmapFont(); // Usa a fonte padrão embutida no libGDX
-
         imageFundo = new Texture(Gdx.files.internal(this.fundo));
 
 
@@ -71,8 +65,6 @@ public class MyGame extends ApplicationAdapter implements InputProcessor {
 
         this.gameDraw = new GameDraw(imageFundo, dinos, bolinhas);
         this.gameIO = new GameIO(this.tamx, this.tamy, bolinhas);
-
-        font.getData().setScale(2); // Aumenta o tamanho da fonte
 
         Gdx.input.setInputProcessor(this);
     }
@@ -106,8 +98,8 @@ public class MyGame extends ApplicationAdapter implements InputProcessor {
     @Override
     public void dispose() {
         // Libera os recursos
-        font.dispose();
         imageFundo.dispose();
+        gameDraw.dispose();
     }
 
     @Override
