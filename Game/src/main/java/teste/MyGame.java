@@ -10,9 +10,6 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import java.util.ArrayList;
 
-
-
-
 public class MyGame extends ApplicationAdapter implements InputProcessor {
     private SpriteBatch batch;
     private BitmapFont font;
@@ -35,11 +32,6 @@ public class MyGame extends ApplicationAdapter implements InputProcessor {
 
         util.setFundo(imageFundo);
         util.drawFundo(0, 0);
-
-        batch.begin();
-        // batch.draw(imageP1, this.p1.getPx(), this.p1.getPy());
-        // batch.draw(imageP2, this.p2.getPx(), this.p2.getPy());
-        batch.end();
 
         util.drawP();
     }
