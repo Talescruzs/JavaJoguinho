@@ -14,7 +14,7 @@ public class MyGame extends ApplicationAdapter implements InputProcessor {
     private SpriteBatch batch;
     private BitmapFont font;
     private String fundo, bolinha;
-    private Texture imageMenuFundo, imageFundo, imageBolinha;
+    private Texture imageFundo, imageBolinha;
     private Dino p1, p2;
     private Texture imageP1, imageP2;
     private int stage = 0;
@@ -76,8 +76,6 @@ public class MyGame extends ApplicationAdapter implements InputProcessor {
         imageBolinha = new Texture(Gdx.files.internal(this.bolinha));
         this.util = new GameUtils(imageFundo, dinos);
 
-        
-
         imageP1 = new Texture(Gdx.files.internal(this.p1.getImg1()));
 
         imageP2 = new Texture(Gdx.files.internal(this.p2.getImg2()));
@@ -101,19 +99,15 @@ public class MyGame extends ApplicationAdapter implements InputProcessor {
         }
         
         if(this.stage == 1){
-            // imageMenuFundo = new Texture(Gdx.files.internal(this.local.getImagens().get(0)));
             imageFundo = new Texture(Gdx.files.internal(this.local.getImagens().get(0)));
             detalhes();
         }
 
         if(this.stage == 2){
+            imageFundo = new Texture(Gdx.files.internal(this.local.getImagens().get(1)));
             pvp();
         }
 
-        // Escreve texto na posição (200, 300)
-        // font.draw(batch, "Olá, Mundo!", 200, 300);
-
-        // Finaliza o processo de desenho
     }
 
     @Override
@@ -122,7 +116,6 @@ public class MyGame extends ApplicationAdapter implements InputProcessor {
         batch.dispose();
         font.dispose();
         imageFundo.dispose();
-        imageMenuFundo.dispose();
         imageP1.dispose();
         imageP2.dispose();
     }
