@@ -7,14 +7,16 @@ public class GameDraw {
     private Texture fundo;
     ArrayList<Dino> pList = new ArrayList<>();
     ArrayList<Bolinha> bolinhas = new ArrayList<>();
+    private BtSelecionar btSelecionar;
     private SpriteBatch batch;
     private Integer stage;
     private Integer posFundox, posFundoy;
 
-    public GameDraw(Texture fundo, ArrayList<Dino> pList, ArrayList<Bolinha> bolinhas) {
+    public GameDraw(Texture fundo, ArrayList<Dino> pList, ArrayList<Bolinha> bolinhas, BtSelecionar btSelecionar) {
         this.fundo = fundo;
         this.pList = pList;
         this.bolinhas = bolinhas;
+        this.btSelecionar = btSelecionar;
         this.stage = 0;
         this.posFundox = 0;
         this.posFundoy = 0;
@@ -42,12 +44,9 @@ public class GameDraw {
     }
 
     protected void drawFundo(){
-        batch.begin();
         batch.draw(this.fundo, this.posFundox, this.posFundoy);
-        batch.end();
     }
     protected void drawP(){
-        batch.begin();
         for (Dino p : this.pList) {
             if (p.whereGo() == 1) {
                 batch.draw(p.getFrame(), p.getPx(), p.getPy(), p.getTamx(), p.getTamy());
@@ -59,24 +58,29 @@ public class GameDraw {
                            p.getTamy());
             }
         }
-        batch.end();
         
     }
     protected void drawBolinha(){
-        batch.begin();
         for (Bolinha b : this.bolinhas) {
             batch.draw(b.getImg(), b.getX(), b.getY());
         }
-        batch.end();
+    }
+    protected void drawjogar(){
+        batch.draw(btSelecionar.getImg(), btSelecionar.getPosx(), btSelecionar.getPosy());
     }
     public void draw(){
+        batch.begin();
         drawFundo();
         if(this.stage == 0){
             drawBolinha();
         }
+        if(this.stage == 1){
+            drawjogar();
+        }
         if(this.stage == 2){
             drawP();
         }
+        batch.end();
     }
 
     public void dispose(){

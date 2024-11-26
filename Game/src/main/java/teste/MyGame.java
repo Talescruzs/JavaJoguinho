@@ -1,5 +1,4 @@
 package teste;
-
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
@@ -15,6 +14,7 @@ public class MyGame extends ApplicationAdapter implements InputProcessor {
     private int stage = 0;
     private GameDraw gameDraw;
     private GameIO gameIO;
+    private BtSelecionar btSelecionar;
     private Locais local;
     private Integer tamx, tamy;
 
@@ -27,7 +27,6 @@ public class MyGame extends ApplicationAdapter implements InputProcessor {
     private void pvp(){
         p1.move();
         p2.move();
-
         gameDraw.setFundo(imageFundo, 0, 0);
         gameDraw.draw();
     }
@@ -44,9 +43,8 @@ public class MyGame extends ApplicationAdapter implements InputProcessor {
 
     @Override
     public void create() {
-
+        btSelecionar = new BtSelecionar(500, 200);
         imageFundo = new Texture(Gdx.files.internal(this.fundo));
-
 
         this.p1 = new Dino(1, 0, 0);
         this.p2 = new Dino(1, 0, 0);
@@ -62,10 +60,8 @@ public class MyGame extends ApplicationAdapter implements InputProcessor {
         bolinha = new Bolinha(1125, 525, 3);
         bolinhas.add(bolinha);
 
-
-        this.gameDraw = new GameDraw(imageFundo, dinos, bolinhas);
-        this.gameIO = new GameIO(this.tamx, this.tamy, bolinhas);
-
+        this.gameDraw = new GameDraw(imageFundo, dinos, bolinhas, btSelecionar);
+        this.gameIO = new GameIO(this.tamx, this.tamy, bolinhas, btSelecionar);
         Gdx.input.setInputProcessor(this);
     }
 
@@ -92,7 +88,6 @@ public class MyGame extends ApplicationAdapter implements InputProcessor {
             gameDraw.goBattle();
             pvp();
         }
-
     }
 
     @Override
@@ -147,49 +142,22 @@ public class MyGame extends ApplicationAdapter implements InputProcessor {
     }
 
     @Override
-    public boolean keyTyped(char character) {
-        // Evento ao digitar uma tecla (ex.: texto)
-        return false;
-    }
-    @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-
-        if(screenX>=725 && screenX<=775 && screenY<=(837-425) && screenY>=(837-475) && stage == 1){
-            System.out.println("Quarta Colonia");
-            this.local = new Locais(1);
-            this.stage = 2;
+        Integer idLocal;
+        if(this.stage == 0){
+            idLocal = gameIO.bolinhaMenuClick(screenX, screenY);
+            if(idLocal != 0){
+                this.local = new Locais(idLocal);
+                this.stage = 1;
+            }
         }
-
-        Integer idLocal = gameIO.bolinhaMenuClick(screenX, screenY);
-        if(idLocal != 0){
-            this.local = new Locais(idLocal);
-            this.stage = 1;
+        else if(this.stage == 1){
+            idLocal = gameIO.selectClick(screenX, screenY);
+            if(idLocal != 0){
+                this.local = new Locais(idLocal);
+                this.stage = 2;
+            }
         }
-
         return true;
-    }
-
-    @Override
-    public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-        // Evento ao soltar o clique
-        return false;
-    }
-
-    @Override
-    public boolean touchDragged(int screenX, int screenY, int pointer) {
-        // Evento ao arrastar o mouse (se necessário)
-        return false;
-    }
-
-    @Override
-    public boolean mouseMoved(int screenX, int screenY) {
-        // Evento ao mover o mouse (se necessário)
-        return false;
-    }
-
-    @Override
-    public boolean scrolled(float amountX, float amountY) {
-        // Evento ao usar o scroll do mouse (se necessário)
-        return false;
     }
 }
