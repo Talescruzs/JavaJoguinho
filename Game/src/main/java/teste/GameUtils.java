@@ -1,7 +1,6 @@
 package teste;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import java.util.ArrayList;
 
 public class GameUtils {
@@ -14,6 +13,16 @@ public class GameUtils {
         this.pList = pList;
 
         batch = new SpriteBatch();
+    }
+    
+    public void setFundo(Texture fundo){
+        this.fundo = fundo;
+    }
+
+    public void drawFundo(Integer x, Integer y){
+        batch.begin();
+        batch.draw(this.fundo, x, y);
+        batch.end();
     }
     public void drawP(){
         batch.begin();

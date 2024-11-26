@@ -3,14 +3,11 @@ package teste;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
-import teste.Dino;
-import teste.Locais;
 import java.util.ArrayList;
 
 
@@ -23,7 +20,6 @@ public class MyGame extends ApplicationAdapter implements InputProcessor {
     private Texture imageMenuFundo, imageFundo, imageBolinha;
     private Dino p1, p2;
     private Texture imageP1, imageP2;
-    private TextureRegion teste;
     private int stage = 0;
     private GameUtils util;
     private Locais local;
@@ -37,8 +33,10 @@ public class MyGame extends ApplicationAdapter implements InputProcessor {
         p1.move();
         p2.move();
 
+        util.setFundo(imageFundo);
+        util.drawFundo(0, 0);
+
         batch.begin();
-        batch.draw(imageFundo, 0, 0);
         // batch.draw(imageP1, this.p1.getPx(), this.p1.getPy());
         // batch.draw(imageP2, this.p2.getPx(), this.p2.getPy());
         batch.end();
@@ -47,17 +45,24 @@ public class MyGame extends ApplicationAdapter implements InputProcessor {
     }
 
     private void menu(){
-        batch.draw(imageFundo, 250, 0);
+        util.setFundo(imageFundo);
+        util.drawFundo(250, 0);
+        batch.begin();
         batch.draw(imageBolinha, 725, 425); // quarta colonia
         batch.draw(imageBolinha, 625, 600); // missões
         batch.draw(imageBolinha, 1125, 525); // torres
+        batch.end();
     }
     
     private void detalhes(){
-        batch.draw(imageFundo, 250, 0);
+        util.setFundo(imageFundo);
+        util.drawFundo(0, 100);
+
+        batch.begin();
         batch.draw(imageBolinha, 725, 425); // quarta colonia
         batch.draw(imageBolinha, 625, 600); // missões
         batch.draw(imageBolinha, 1125, 525); // torres
+        batch.end();
     }
 
     @Override
@@ -74,10 +79,10 @@ public class MyGame extends ApplicationAdapter implements InputProcessor {
         ArrayList<Dino> dinos = new ArrayList<>();
         dinos.add(this.p1); // Primeiro Dino
         dinos.add(this.p2); // Segundo Dino
-        this.util = new GameUtils(imageFundo, dinos);
 
         imageFundo = new Texture(Gdx.files.internal(this.fundo));
         imageBolinha = new Texture(Gdx.files.internal(this.bolinha));
+        this.util = new GameUtils(imageFundo, dinos);
 
         
 
@@ -100,17 +105,13 @@ public class MyGame extends ApplicationAdapter implements InputProcessor {
 
         if(this.stage == 0){
             imageFundo = new Texture(Gdx.files.internal(this.fundo));
-            batch.begin();
             menu();
-            batch.end();
         }
         
         if(this.stage == 1){
             // imageMenuFundo = new Texture(Gdx.files.internal(this.local.getImagens().get(0)));
             imageFundo = new Texture(Gdx.files.internal(this.local.getImagens().get(0)));
-            batch.begin();
             detalhes();
-            batch.end();
         }
 
         if(this.stage == 2){
