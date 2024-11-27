@@ -14,12 +14,12 @@ public class Avatar{
         this.vidaAtual = 0;
         this.posy = tamy-300;
         if(isP1){
-            this.posx = 50;
+            this.posx = 0;
             this.img = new Texture(Gdx.files.internal("Game/src/main/resources/img/IndetP1A.jpg"));
         }
         else{
             this.img = new Texture(Gdx.files.internal("Game/src/main/resources/img/IndetP2A.jpg"));
-            this.posx = tamx-350;
+            this.posx = tamx-300;
         }
         this.animation = new Animation(new TextureRegion(this.img), 2, 30f);
     }

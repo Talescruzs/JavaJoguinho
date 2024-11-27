@@ -158,6 +158,7 @@ public class GameController {
         this.stage = 1;
     }
     private void goQuiz(){ // TODO
+        gameDraw.setFundo(new Texture(Gdx.files.internal("Game/src/main/resources/img/fundoQuiz.jpg")), 250, 0, this.tamx-500, this.tamy);
         this.stage = 2;
     }
     private void goPvp(){
