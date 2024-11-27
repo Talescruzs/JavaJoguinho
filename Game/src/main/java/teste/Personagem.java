@@ -33,7 +33,7 @@ public class Personagem {
     private double dy = 0.0;
     private String img1, img2, imgAva;
     private Map<String, Ataque> ataques;
-    private Animation animation;
+    private Animation animation, aniAtack;
     private Texture avatar;
     private ArrayList<Integer> listMoves = new ArrayList<Integer>();
 
@@ -139,6 +139,16 @@ public class Personagem {
         }
     }
 
+    public void jump(){
+        if(this.posy == this.posyBase){
+            this.dy = 19;
+        }
+    }
+
+    public void atack(){
+
+    }
+
     private void gravity(){
         this.posy += this.dy;
         this.dy -= 0.6;
@@ -148,11 +158,7 @@ public class Personagem {
         }
     }
 
-    public void jump(){
-        if(this.posy == this.posyBase){
-            this.dy = 19;
-        }
-    }
+    
 
     // Getters e Setters
     public int getId() { return id; }

@@ -39,10 +39,13 @@ public class GameDraw {
         if(stage == 0){
             drawBolinha(bolinhas);
         }
-        if(stage == 1){
+        else if(stage == 1){
             drawBts(0);
         }
-        if(stage == 2){
+        else if(stage == 2){ // TODO
+            // Quiz
+        }
+        else if(stage == 3){
             drawP(pList);
         }
         batch.end();

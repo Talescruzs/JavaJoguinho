@@ -72,16 +72,25 @@ public class GameController {
             if(idLocal > 0){
                 this.local = new Locais(idLocal);
                 createPersonagem(this.local.getPersonagem());
-                System.out.println(this.avatarAtualSelec);
                 
-                changeAvatar();
-                if(this.avatarAtualSelec == 3){
-                    goPvp();
+                if(this.stage != 2){
+                    goQuiz();
+
                 }
-                else{
-                    goMenu();
+                else {
+                    changeAvatar();
+                    if(this.avatarAtualSelec == 3){
+                        goPvp();
+                    }
+                    else{
+                        goMenu();
+                    }
                 }
+
             }
+        }
+        else if(this.stage == 2){ // TODO
+            // quiz
         }
     }
     public void tecla(int keycode){
@@ -117,6 +126,7 @@ public class GameController {
             movies.add(Input.Keys.A);
             movies.add(Input.Keys.D);
             movies.add(Input.Keys.W);
+            movies.add(Input.Keys.F); // ataque
             p.setMoves(movies);
         }
         else if(this.avatarAtualSelec == 2) {
@@ -126,6 +136,7 @@ public class GameController {
             movies.add(Input.Keys.LEFT);
             movies.add(Input.Keys.RIGHT);
             movies.add(Input.Keys.UP);
+            movies.add(Input.Keys.ENTER); // ataque
             p.setMoves(movies);
         }
         else{
@@ -146,10 +157,12 @@ public class GameController {
         gameDraw.setFundo(new Texture(Gdx.files.internal(this.local.getImagens().get(0))), 0, 100, this.tamx, this.tamy-200);
         this.stage = 1;
     }
-    private void goPvp(){
-        System.err.println("aaaaaa");
-        gameDraw.setFundo(new Texture(Gdx.files.internal(this.local.getImagens().get(0))), 0, 100, this.tamx, this.tamy-200);
+    private void goQuiz(){ // TODO
         this.stage = 2;
+    }
+    private void goPvp(){
+        gameDraw.setFundo(new Texture(Gdx.files.internal(this.local.getImagens().get(0))), 0, 100, this.tamx, this.tamy-200);
+        this.stage = 3;
     }
 
     // Metodos internos
