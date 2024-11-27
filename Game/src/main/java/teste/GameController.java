@@ -2,6 +2,7 @@ package teste;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 
@@ -42,6 +43,12 @@ public class GameController {
         this.avatarAtualSelec = 1;
     }
 
+    public void move(){
+        for (Personagem p : personagens) {
+            p.move();
+        }
+    }
+
     public void render(){
         // Limpa a tela
         Gdx.gl.glClearColor(0, 0, 0, 1); // Define a cor de fundo (preto)
@@ -52,7 +59,6 @@ public class GameController {
 
     public void click(int screenX, int screenY, int pointer, int button){
         Integer idLocal;
-        // System.out.println("clicou");
         if(this.stage == 0){
             idLocal = gameIO.bolinhaMenuClick(screenX, screenY);
             if(idLocal != 0){
@@ -60,7 +66,6 @@ public class GameController {
             }
         }
         else if(this.stage == 1){
-
             idLocal = gameIO.selectClick(screenX, screenY);
             if(idLocal != 0){
                 this.local = new Locais(idLocal);
@@ -75,6 +80,12 @@ public class GameController {
                     goMenu();
                 }
             }
+        }
+    }
+
+    public void tecla(int keycode){
+        for (Personagem p : personagens) {
+            p.processMove(keycode);
         }
     }
 
@@ -96,9 +107,21 @@ public class GameController {
         Personagem p;
         if(this.avatarAtualSelec == 1){
             p = new Personagem(id, 0, 100);
+            
+            ArrayList<Integer> movies = new ArrayList<Integer>();
+            movies.add(Input.Keys.A);
+            movies.add(Input.Keys.D);
+            movies.add(Input.Keys.W);
+            p.setMoves(movies);
         }
         else if(this.avatarAtualSelec == 2) {
             p = new Personagem(id, 500, 100);
+
+            ArrayList<Integer> movies = new ArrayList<Integer>();
+            movies.add(Input.Keys.LEFT);
+            movies.add(Input.Keys.RIGHT);
+            movies.add(Input.Keys.UP);
+            p.setMoves(movies);
         }
         else{
             return;

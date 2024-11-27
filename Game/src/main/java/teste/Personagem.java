@@ -1,4 +1,6 @@
 package teste;
+
+import java.util.ArrayList;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -33,6 +35,7 @@ public class Personagem {
     private Map<String, Ataque> ataques;
     private Animation animation;
     private Texture avatar;
+    private ArrayList<Integer> listMoves = new ArrayList<Integer>();
 
     @JsonCreator
     private Personagem(
@@ -91,6 +94,22 @@ public class Personagem {
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException("Erro ao inicializar o Personagem com ID " + id, e);
+        }
+    }
+
+    public void setMoves(ArrayList<Integer> listMoves){
+        this.listMoves = listMoves;
+    }
+
+    public void processMove(Integer move){
+        if (move.equals(this.listMoves.get(0))) {
+            changeEsq();
+        } 
+        else if (move.equals(this.listMoves.get(1))){
+            changeDir();
+        }
+        else if (move.equals(this.listMoves.get(2))){
+            jump();
         }
     }
 

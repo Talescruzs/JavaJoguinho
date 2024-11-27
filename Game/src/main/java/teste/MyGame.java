@@ -30,6 +30,7 @@ public class MyGame extends ApplicationAdapter implements InputProcessor {
 
     @Override
     public void render() {
+        gController.move();
         gController.render();
     }
 
@@ -42,45 +43,14 @@ public class MyGame extends ApplicationAdapter implements InputProcessor {
 
     @Override
     public boolean keyDown(int keycode) {
-        // Move a imagem com as setas do teclado
-        switch (keycode) {
-            case Input.Keys.LEFT:
-                p2.changeEsq();
-                break;
-            case Input.Keys.RIGHT:
-                p2.changeDir();
-                break;
-            case Input.Keys.UP:
-                p2.jump();
-                break;
-            case Input.Keys.A:
-                p1.changeEsq();
-                break;
-            case Input.Keys.D:
-                p1.changeDir();
-                break;
-            case Input.Keys.W:
-                p1.jump();
-                break;
-        }
+        gController.tecla(keycode);
+
         return true;
     }
     @Override
     public boolean keyUp(int keycode) {
-        switch (keycode) {
-            case Input.Keys.LEFT:
-                p2.changeEsq();
-                break;
-            case Input.Keys.RIGHT:
-                p2.changeDir();
-                break;
-            case Input.Keys.A:
-                p1.changeEsq();
-                break;
-            case Input.Keys.D:
-                p1.changeDir();
-                break;
-        }
+        gController.tecla(keycode);
+
         return false;
     }
     @Override
