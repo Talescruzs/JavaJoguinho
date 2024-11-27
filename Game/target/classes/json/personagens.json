@@ -5,6 +5,7 @@
         "tamy":409,
         "img1":"Game/src/main/resources/img/Bagualossauro2-g.png",
         "img2":"Game/src/main/resources/img/Bagualossauro1.png",
+        "avatar":"Game/src/main/resources/img/avatarBagual1.png",
         "ataques":{
             "forte":{
                 "dano":5,
@@ -23,6 +24,7 @@
         "tamx":100,
         "tamy":100,
         "img1":"../Img2",
+        "avatar":"Game/src/main/resources/img/avatarBagual1.png",
         "ataques":{
             "forte":{
                 "dano":5,

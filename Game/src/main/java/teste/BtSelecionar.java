@@ -13,8 +13,21 @@ public class BtSelecionar {
         this.tamx = tamx;
         this.tamy = tamy;
     }
-    public BtSelecionar(Integer posx, Integer posy){
-        this("Game/src/main/resources/img/btJogar.jpg", posx, posy, 500, 200);
+    public BtSelecionar(Integer option, Integer posx, Integer posy){
+        if(option == 0){
+            this.img = new Texture(Gdx.files.internal("Game/src/main/resources/img/btJogar.jpg"));
+            this.posx = posx;
+            this.posy = posy;
+            this.tamx = 500;
+            this.tamy = 200;
+        }
+        else{
+            this.img = new Texture(Gdx.files.internal("Game/src/main/resources/img/btVoltar.jpg"));
+            this.posx = posx;
+            this.posy = posy;
+            this.tamx = 500;
+            this.tamy = 200;
+        }
     }
     public Texture getImg() { return this.img; }
     public Integer getPosx() { return this.posx; }

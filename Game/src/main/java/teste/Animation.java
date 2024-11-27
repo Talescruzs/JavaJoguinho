@@ -32,7 +32,10 @@ public class Animation {
         }
         if(frame >= frameCount)
             frame = 0;
+    }
 
+    public void setFrameIni(){
+        frame = 0;
     }
 
     public void flip(){

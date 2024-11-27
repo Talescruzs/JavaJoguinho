@@ -23,81 +23,85 @@ class Ataque {
     public void setVelocidade(int velocidade) { this.velocidade = velocidade; }
 }
 
-public class Dino {
+public class Personagem {
     private int id;
     private int tamx, tamy;
     private int esq = 0, dir = 0, whereG = 0;
     private float posx, posy, posyBase; 
     private double dy = 0.0;
-    private String img1;
-    private String img2;
+    private String img1, img2, imgAva;
     private Map<String, Ataque> ataques;
     private Animation animation;
-    private Texture imagem;
+    private Texture avatar;
 
     @JsonCreator
-    private Dino(
+    private Personagem(
         @JsonProperty("id") int id,
         @JsonProperty("tamx") int tamx,
         @JsonProperty("tamy") int tamy,
         @JsonProperty("img1") String img1,
-        @JsonProperty("img2") String img2
+        @JsonProperty("img2") String img2,
+        @JsonProperty("avatar") String imgAva
     ) {
         this.id = id;
         this.tamx = tamx;
         this.tamy = tamy;
         this.img1 = img1;
         this.img2 = img2;
+        this.imgAva = imgAva;
     }
 
-    // Construtor que inicializa o Dino com base no ID
-    public Dino(int id, float posx, float posy) {
+    // Construtor que inicializa o Personagem com base no ID
+    public Personagem(int id, float posx, float posy) {
         try {
             // Caminho para o arquivo JSON
-            File file = new File("Game/src/main/resources/json/dinos.json");
+            File file = new File("Game/src/main/resources/json/personagens.json");
 
             // Criar o ObjectMapper
             ObjectMapper objectMapper = new ObjectMapper();
 
             // Ler o JSON como um Map
-            Map<String, Dino> dinos = objectMapper.readValue(file,
-                    objectMapper.getTypeFactory().constructMapType(Map.class, String.class, Dino.class));
+            Map<String, Personagem> personagens = objectMapper.readValue(file,
+                    objectMapper.getTypeFactory().constructMapType(Map.class, String.class, Personagem.class));
 
-            // Procurar pelo dino com o ID correspondente
-            Dino dino = dinos.values().stream()
+            // Procurar pelo personagem com o ID correspondente
+            Personagem personagem = personagens.values().stream()
                     .filter(d -> d.getId() == id)
                     .findFirst()
-                    .orElseThrow(() -> new IllegalArgumentException("Dino com ID " + id + " não encontrado!"));
+                    .orElseThrow(() -> new IllegalArgumentException("Personagem com ID " + id + " não encontrado!"));
 
 
 
-            // Inicializar os atributos do Dino atual com os valores do JSON
-            this.id = dino.id;
-            this.tamx = dino.tamx;
-            this.tamy = dino.tamy;
-            this.img1 = dino.img1;
-            this.img2 = dino.img2;
-            this.ataques = dino.ataques;
+            // Inicializar os atributos do Personagem atual com os valores do JSON
+            this.id = personagem.id;
+            this.tamx = personagem.tamx;
+            this.tamy = personagem.tamy;
+            this.img1 = personagem.img1;
+            this.img2 = personagem.img2;
+            this.ataques = personagem.ataques;
             this.posx = posx;
             this.posy = posy;
             this.posyBase = posy;
-            this.imagem = new Texture(Gdx.files.internal(dino.img1));
-            this.animation = new Animation(new TextureRegion(this.imagem), 2, 10f);
+            this.imgAva = personagem.imgAva;
+
+            Texture imagem = new Texture(Gdx.files.internal(personagem.img1));
+            this.avatar = new Texture(Gdx.files.internal(this.imgAva));
+            this.animation = new Animation(new TextureRegion(imagem), 2, 10f);
 
         } catch (Exception e) {
             e.printStackTrace();
-            throw new RuntimeException("Erro ao inicializar o Dino com ID " + id, e);
+            throw new RuntimeException("Erro ao inicializar o Personagem com ID " + id, e);
         }
     }
 
     public void move(){
         if(this.esq == 1){
             this.move_esq();
-            this.animation.update(esq);
+            this.animation.update(1);
         }
         if(this.dir == 1){
             this.move_dir();
-            this.animation.update(dir);
+            this.animation.update(1);
         }
         gravity();
     }
@@ -141,6 +145,7 @@ public class Dino {
     public Float getPx() { return this.posx; }
     public Float getPy() { return this.posy; }
     public TextureRegion getFrame(){return this.animation.getFrame();}
+    public Texture getAvatar(){return this.avatar; }
     
     public int whereGo(){
         if(this.dir == 1){
