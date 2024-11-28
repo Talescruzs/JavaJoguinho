@@ -8,16 +8,7 @@
                 "Game/src/main/resources/img/QuartaColonia.jpg"
             ],
             "personagem": 1,
-            "questoes": [
-                {
-                    "pergunta": "Somos uma iniciativa da Universidade Federal de Santa Maria (UFSM) em parceria com o Consórcio Intermunicipal de Desenvolvimento Sustentável de uma cidade gaúcha",
-                    "resposta": "Geoparque Quarta Colônia"
-                },
-                {
-                    "pergunta": "Somos formados por nove municípios: Agudo, Dona Francisca, Faxinal do Soturno, Ivorá, Nova Palma, Pinhal Grande, Restinga Seca, São João do Polêsine e Silveira Martins",
-                    "resposta": "Geoparque Quarta Colônia"
-                }
-            ]
+            "questoes": [1,1]
         },
         {
             "nome": "Missões",
@@ -27,16 +18,7 @@
                 "Game/src/main/resources/img/Missoes.jpg"
             ],
             "personagem": 2,
-            "questoes": [
-                {
-                    "pergunta": "Qual é o local de chegada dos trens em Santa Maria, que hoje é um importante ponto histórico e cultural?",
-                    "resposta": "Gare da estação"
-                },
-                {
-                    "pergunta": "Qual local abriga eventos e exposições em Santa Maria, mantendo viva a memória ferroviária da cidade?",
-                    "resposta": "Gare da estação"
-                }
-            ]
+            "questoes": [1,1]
         },
         {
             "nome": "Torres",
@@ -46,16 +28,17 @@
                 "Game/src/main/resources/img/Torres.jpg"
             ],
             "personagem": 1,
-            "questoes": [
-                {
-                    "pergunta": "Qual é o local de chegada dos trens em Santa Maria, que hoje é um importante ponto histórico e cultural?",
-                    "resposta": "Gare da estação"
-                },
-                {
-                    "pergunta": "Qual local abriga eventos e exposições em Santa Maria, mantendo viva a memória ferroviária da cidade?",
-                    "resposta": "Gare da estação"
-                }
-            ]
+            "questoes": [1,1]
+        },
+        {
+            "nome": "Tal",
+            "id": 4,
+            "imagens": [
+                "Game/src/main/resources/img/Torres.jpg",
+                "Game/src/main/resources/img/Torres.jpg"
+            ],
+            "personagem": 1,
+            "questoes": [1,1]
         }
     ]
 }

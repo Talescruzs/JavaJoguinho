@@ -10,6 +10,7 @@ public class GameController {
     private Integer tamx, tamy, stage, avatarAtualSelec;
     private Texture fundoBase;
     private Locais local;
+    private Quiz quiz;
     
     private ArrayList<Personagem> personagens = new ArrayList<>();
     private ArrayList<Bolinha> bolinhas = new ArrayList<>();
@@ -38,7 +39,7 @@ public class GameController {
             new BtSelecionar(0, 200, 200),
             new BtSelecionar(1, this.tamx-500, 200)
         );
-        createBolinhas();
+        createBolinhas(0);
         createAvatars();
         this.avatarAtualSelec = 1;
     }
@@ -54,7 +55,7 @@ public class GameController {
         Gdx.gl.glClearColor(0, 0, 0, 1); // Define a cor de fundo (preto)
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        this.gameDraw.draw(this.stage, this.avatarAtualSelec-1, this.bolinhas, this.personagens, this.avatars);
+        this.gameDraw.draw(this.stage, this.avatarAtualSelec-1, this.bolinhas, this.personagens, this.avatars, this.quiz);
     }
     public void click(int screenX, int screenY, int pointer, int button){
         Integer idLocal;
@@ -71,6 +72,7 @@ public class GameController {
             }
             if(idLocal > 0){
                 this.local = new Locais(idLocal);
+                this.quiz = new Quiz(idLocal);
                 createPersonagem(this.local.getPersonagem());
                 
                 if(this.stage != 2){
@@ -89,8 +91,17 @@ public class GameController {
 
             }
         }
-        else if(this.stage == 2){ // TODO
-            // quiz
+        else if(this.stage == 2){
+            idLocal = (gameIO.bolinhaMenuClick(screenX, screenY) - 1); // desculpa
+            if(this.quiz.isRespostaCorreta(idLocal)){
+                changeAvatar();
+                if(this.avatarAtualSelec == 3){
+                    goPvp();
+                }
+                else{
+                    goMenu();
+                }
+            }
         }
     }
     public void tecla(int keycode){
@@ -103,13 +114,27 @@ public class GameController {
     }
     
     // Parte Criacoes
-    private void createBolinhas(){
-        Bolinha bolinha = new Bolinha(725, 425, 1); // Quarta Colônia
-        this.bolinhas.add(bolinha);
-        bolinha = new Bolinha(625, 600, 2); // Missões
-        this.bolinhas.add(bolinha);
-        bolinha = new Bolinha(1125, 525, 3); // Torres
-        this.bolinhas.add(bolinha);
+    private void createBolinhas(Integer op){
+        Bolinha bolinha;
+        bolinhas.clear();
+        if(op == 0){
+            bolinha = new Bolinha(725, 425, 1); // Quarta Colônia
+            this.bolinhas.add(bolinha);
+            bolinha = new Bolinha(625, 600, 2); // Missões
+            this.bolinhas.add(bolinha);
+            bolinha = new Bolinha(1125, 525, 3); // Torres
+            this.bolinhas.add(bolinha);
+        } 
+        if(op == 1){
+            bolinha = new Bolinha(470, 100, 1); 
+            this.bolinhas.add(bolinha);
+            bolinha = new Bolinha(470, 206, 2); 
+            this.bolinhas.add(bolinha);
+            bolinha = new Bolinha(470, 313, 3); 
+            this.bolinhas.add(bolinha);
+            bolinha = new Bolinha(470, 421, 4); 
+            this.bolinhas.add(bolinha);
+        }
     }
     private void createAvatars(){
         Avatar avatar = new Avatar(true, this.tamx, this.tamy);
@@ -150,6 +175,7 @@ public class GameController {
     // Rotas
     private void goMenu(){
         gameDraw.setFundo(fundoBase, 250, 0, 1000, 837);
+        createBolinhas(0);
         this.stage = 0;
     }
     private void goDetalhes(Integer idLocal){
@@ -157,8 +183,9 @@ public class GameController {
         gameDraw.setFundo(new Texture(Gdx.files.internal(this.local.getImagens().get(0))), 0, 100, this.tamx, this.tamy-200);
         this.stage = 1;
     }
-    private void goQuiz(){ // TODO
+    private void goQuiz(){
         gameDraw.setFundo(new Texture(Gdx.files.internal("Game/src/main/resources/img/fundoQuiz.jpg")), 250, 0, this.tamx-500, this.tamy);
+        createBolinhas(1);
         this.stage = 2;
     }
     private void goPvp(){

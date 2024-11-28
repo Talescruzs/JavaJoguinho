@@ -1,10 +1,14 @@
 package teste;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.ApplicationAdapter;
 import java.util.ArrayList;
 
 public class GameDraw {
     private SpriteBatch batch;
+    private BitmapFont font;
     
     private Texture fundo;
     private BtSelecionar btSelecionar, btVoltar;
@@ -21,6 +25,9 @@ public class GameDraw {
         this.tamy = tamy;
 
         batch = new SpriteBatch();
+        font = new BitmapFont();
+        font.setColor(Color.BLACK); // Cor do texto
+        font.getData().setScale(2); // Tamanho do texto
     }
     
     // Modifica
@@ -33,7 +40,7 @@ public class GameDraw {
     }
     
     // Desenho
-    public void draw(Integer stage, Integer avatarSelect, ArrayList<Bolinha> bolinhas, ArrayList<Personagem> pList, ArrayList<Avatar> avatars){
+    public void draw(Integer stage, Integer avatarSelect, ArrayList<Bolinha> bolinhas, ArrayList<Personagem> pList, ArrayList<Avatar> avatars, Quiz quiz){
         batch.begin();
         drawFundo(avatars, avatarSelect);
         if(stage == 0){
@@ -43,7 +50,27 @@ public class GameDraw {
             drawBts(0);
         }
         else if(stage == 2){ // TODO
-            // Quiz
+            ArrayList<Integer> posy = new ArrayList<>();
+            Integer py;
+            py = 100+35;
+            posy.add(py);
+            py = 206+35;
+            posy.add(py);
+            py = 313+35;
+            posy.add(py);
+            py = 421+35;
+            posy.add(py);
+            ArrayList<Integer> posx = new ArrayList<>();
+            Integer px;
+            px = 550;
+            posx.add(px);
+            posx.add(px);
+            posx.add(px);
+            posx.add(px);
+
+            drawPalavras(quiz.getRespostas(), posx, posy);
+            drawPalavras(quiz.getPergunta(), 390, 630);
+            drawBolinha(bolinhas);
         }
         else if(stage == 3){
             drawP(pList);
@@ -82,6 +109,15 @@ public class GameDraw {
         if(op == 0){
             batch.draw(btSelecionar.getImg(), btSelecionar.getPosx(), btSelecionar.getPosy());
             batch.draw(btVoltar.getImg(), btVoltar.getPosx(), btVoltar.getPosy());
+        }
+    }
+    // Palavras
+    private void drawPalavras(String palavra, Integer posx, Integer posy){
+        font.draw(batch, palavra, posx, posy, 900, 10, true); // Texto, posição X, posição Y
+    }
+    private void drawPalavras(ArrayList<String> palavras, ArrayList<Integer> posx, ArrayList<Integer> posy){
+        for (Integer i = 0; i < palavras.size(); i++) {
+            drawPalavras(palavras.get(i), posx.get(i), posy.get(i));
         }
     }
 

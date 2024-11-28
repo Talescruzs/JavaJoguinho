@@ -8,29 +8,7 @@ public class Locais {
     private int id;
     private List<String> imagens;
     private Integer personagem;
-    private List<Questao> questoes;
-
-    public static class Questao {
-        private String pergunta;
-        private String resposta;
-
-        // Getters e Setters
-        public String getPergunta() {
-            return pergunta;
-        }
-
-        public void setPergunta(String pergunta) {
-            this.pergunta = pergunta;
-        }
-
-        public String getResposta() {
-            return resposta;
-        }
-
-        public void setResposta(String resposta) {
-            this.resposta = resposta;
-        }
-    }
+    private List<Integer> questoes;
 
     // Classe para mapear a raiz do JSON
     public static class LocaisWrapper {
@@ -112,11 +90,8 @@ public class Locais {
         this.personagem = personagem;
     }
 
-    public List<Questao> getQuestoes() {
+    public List<Integer> getQuestoes() {
         return questoes;
     }
 
-    public void setQuestoes(List<Questao> questoes) {
-        this.questoes = questoes;
-    }
 }
