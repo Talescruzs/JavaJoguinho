@@ -4,7 +4,7 @@
         "tamx":742,
         "tamy":409,
         "img1":"Game/src/main/resources/img/Bagualossauro2-g.png",
-        "img2":"Game/src/main/resources/img/Bagualossauro1.png",
+        "img2":"Game/src/main/resources/img/Bagualossauro1-g.png",
         "avatar":"Game/src/main/resources/img/avatarBagual1.png",
         "ataques":{
             "forte":{
@@ -23,8 +23,8 @@
         "id":2,
         "tamx":742,
         "tamy":409,
-        "img1":"Game/src/main/resources/img/Bagualossauro1.png",
-        "img2":"Game/src/main/resources/img/Bagualossauro1.png",
+        "img1":"Game/src/main/resources/img/Bagualossauro1-g.png",
+        "img2":"Game/src/main/resources/img/Bagualossauro1-g.png",
         "avatar":"Game/src/main/resources/img/avatarBagual1.png",
         "ataques":{
             "forte":{
