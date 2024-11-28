@@ -114,13 +114,18 @@ public class Personagem {
     }
 
     public void move(){
-        if(this.esq == 1){
-            this.move_esq();
-            this.animation.update(1);
+        if(this.dir == 1 && this.esq == 1){
+            this.animation.setFrameIni();
         }
-        if(this.dir == 1){
-            this.move_dir();
-            this.animation.update(1);
+        else{
+            if(this.esq == 1){
+                this.move_esq();
+                this.animation.update(1);
+            }
+            if(this.dir == 1){
+                this.move_dir();
+                this.animation.update(1);
+            }
         }
         gravity();
     }
@@ -172,17 +177,18 @@ public class Personagem {
     public TextureRegion getFrame(){return this.animation.getFrame();}
     public Texture getAvatar(){return this.avatar; }
     
+    
+
     public int whereGo(){
-        if(this.dir == 1){
+        if(this.dir == 1 && this.esq == 0){
             this.whereG = 0;
         }
-        if(this.esq == 1){
+        else if(this.esq == 1 && this.dir == 0){
             this.whereG = 1;
         }
         return this.whereG;
     }
-
-    public void changeEsq(){
+    private void changeEsq(){
         if(this.esq == 0){
             this.esq = 1;
         }
@@ -190,8 +196,7 @@ public class Personagem {
             this.esq = 0;
         }
     }
-    
-    public void changeDir(){
+    private void changeDir(){
         if(this.dir == 0){
             this.dir = 1;
         }

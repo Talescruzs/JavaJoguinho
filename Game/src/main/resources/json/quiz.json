@@ -1,22 +1,44 @@
 {
     "Q1": {
         "id": 1,
-        "pergunta": "Somos uma iniciativa da UFSM em parceria com o Consórcio Intermunicipal de Desenvolvimento Sustentável de uma cidade gaúcha",
+        "pergunta": "Somos uma iniciativa da UFSM em parceria com o Consórcio Intermunicipal de Desenvolvimento Sustentável de uma cidade gaúcha, quem somos?",
         "respostas": [
             "Geoparque Quarta Colônia",
-            "Resposta Errada 1",
-            "Resposta Errada 2",
+            "Sete Povos das Missões",
+            "Praia de Torres",
             "Resposta Errada 3"
         ],
         "respostaCorretaIndex": 0
     },
     "Q2": {
         "id": 2,
-        "pergunta": "Sou uma praia gaúcha",
+        "pergunta": "Temos Grande força no turismo ecológico da região, também contamos com acervo arqueológico, quem somos?",
         "respostas": [
-            "Resposta Errada 1",
+            "Sete Povos das Missões",
+            "Praia de Torres",
+            "Geoparque Quarta Colônia",
+            "Resposta Errada 3"
+        ],
+        "respostaCorretaIndex": 2
+    },
+    "Q3": {
+        "id": 3,
+        "pergunta": "Somos reconhecidos como Geoparque Mundial por um órgão da ONU, qual?",
+        "respostas": [
+            "ONU",
+            "UNICEF",
+            "FAO",
+            "UNESCO"
+        ],
+        "respostaCorretaIndex": 3
+    },
+    "Q4": {
+        "id": 4,
+        "pergunta": "Sou uma praia gaúcha que se destaca pelos seus paredões rochosos à beira-mar",
+        "respostas": [
+            "Missões",
             "Torres",
-            "Resposta Errada 2",
+            "Quarta Colônia",
             "Resposta Errada 3"
         ],
         "respostaCorretaIndex": 1

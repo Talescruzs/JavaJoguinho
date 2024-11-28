@@ -1,5 +1,6 @@
 package teste;
 import java.util.ArrayList;
+import java.util.Random;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -72,7 +73,8 @@ public class GameController {
             }
             if(idLocal > 0){
                 this.local = new Locais(idLocal);
-                this.quiz = new Quiz(this.local.getQuestoes().get(0));
+                int random = new Random().nextInt(local.getQuestoes().size());
+                this.quiz = new Quiz(this.local.getQuestoes().get(random));
                 createPersonagem(this.local.getPersonagem());
                 
                 if(this.stage != 2){
