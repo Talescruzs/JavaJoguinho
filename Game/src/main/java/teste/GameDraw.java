@@ -52,13 +52,13 @@ public class GameDraw {
         else if(stage == 2){ // TODO
             ArrayList<Integer> posy = new ArrayList<>();
             Integer py;
-            py = 100+35;
+            py = 100+24+35;
             posy.add(py);
-            py = 206+35;
+            py = 206+24+35;
             posy.add(py);
-            py = 313+35;
+            py = 313+24+35;
             posy.add(py);
-            py = 421+35;
+            py = 421+24+35;
             posy.add(py);
             ArrayList<Integer> posx = new ArrayList<>();
             Integer px;

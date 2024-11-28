@@ -72,7 +72,7 @@ public class GameController {
             }
             if(idLocal > 0){
                 this.local = new Locais(idLocal);
-                this.quiz = new Quiz(idLocal);
+                this.quiz = new Quiz(this.local.getQuestoes().get(0));
                 createPersonagem(this.local.getPersonagem());
                 
                 if(this.stage != 2){
@@ -126,13 +126,13 @@ public class GameController {
             this.bolinhas.add(bolinha);
         } 
         if(op == 1){
-            bolinha = new Bolinha(470, 100, 1); 
+            bolinha = new Bolinha(470, 100+24, 1); 
             this.bolinhas.add(bolinha);
-            bolinha = new Bolinha(470, 206, 2); 
+            bolinha = new Bolinha(470, 206+24, 2); 
             this.bolinhas.add(bolinha);
-            bolinha = new Bolinha(470, 313, 3); 
+            bolinha = new Bolinha(470, 313+24, 3); 
             this.bolinhas.add(bolinha);
-            bolinha = new Bolinha(470, 421, 4); 
+            bolinha = new Bolinha(470, 421+24, 4); 
             this.bolinhas.add(bolinha);
         }
     }

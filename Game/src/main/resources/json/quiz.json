@@ -9,5 +9,16 @@
             "Resposta Errada 3"
         ],
         "respostaCorretaIndex": 0
+    },
+    "Q2": {
+        "id": 2,
+        "pergunta": "Sou uma praia gaúcha",
+        "respostas": [
+            "Resposta Errada 1",
+            "Torres",
+            "Resposta Errada 2",
+            "Resposta Errada 3"
+        ],
+        "respostaCorretaIndex": 1
     }
 }
