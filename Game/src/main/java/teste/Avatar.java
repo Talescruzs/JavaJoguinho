@@ -26,6 +26,7 @@ public class Avatar{
     public void setPersonagem(Integer id){
         Personagem personagem = new Personagem(id, 0, 0); 
         this.img = personagem.getAvatar();
+        this.animation = new Animation(new TextureRegion(this.img), 1, 30f);
     }
     public Integer getX(){ return this.posx; }
     public Integer getY(){ return this.posy; }

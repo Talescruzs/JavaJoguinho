@@ -47,8 +47,9 @@ public class GameController {
 
     // Parte Interativa
     public void move(){
-        for (Personagem p : personagens) {
-            p.move();
+        if(this.stage ==3){ 
+            personagens.get(0).move(personagens.get(1));
+            personagens.get(1).move(personagens.get(0));
         }
     }
     public void render(){
@@ -96,6 +97,8 @@ public class GameController {
         else if(this.stage == 2){
             idLocal = (gameIO.bolinhaMenuClick(screenX, screenY) - 1); // desculpa
             if(this.quiz.isRespostaCorreta(idLocal)){
+                avatars.get(this.avatarAtualSelec-1).setPersonagem(this.local.getPersonagem());
+
                 changeAvatar();
                 if(this.avatarAtualSelec == 3){
                     goPvp();
@@ -147,7 +150,7 @@ public class GameController {
     private void createPersonagem(Integer id){
         Personagem p;
         if(this.avatarAtualSelec == 1){
-            p = new Personagem(id, 0, 100);
+            p = new Personagem(id, 0, 300);
             
             ArrayList<Integer> movies = new ArrayList<Integer>();
             movies.add(Input.Keys.A);
@@ -157,7 +160,7 @@ public class GameController {
             p.setMoves(movies);
         }
         else if(this.avatarAtualSelec == 2) {
-            p = new Personagem(id, 500, 100);
+            p = new Personagem(id, 900, 300);
 
             ArrayList<Integer> movies = new ArrayList<Integer>();
             movies.add(Input.Keys.LEFT);

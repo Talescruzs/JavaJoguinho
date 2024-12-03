@@ -36,6 +36,7 @@ public class Personagem {
     private Animation animation, aniAtack;
     private Texture avatar;
     private ArrayList<Integer> listMoves = new ArrayList<Integer>();
+    private Quadrado area, ataque;
 
     @JsonCreator
     private Personagem(
@@ -84,8 +85,9 @@ public class Personagem {
             this.ataques = personagem.ataques;
             this.posx = posx;
             this.posy = posy;
-            this.posyBase = posy;
+            this.posyBase = 100;
             this.imgAva = personagem.imgAva;
+            this.area = new Quadrado(posx, posy+tamy, posx+tamx, posy);
 
             Texture imagem = new Texture(Gdx.files.internal(personagem.img1));
             this.avatar = new Texture(Gdx.files.internal(this.imgAva));
@@ -111,9 +113,12 @@ public class Personagem {
         else if (move.equals(this.listMoves.get(2))){
             jump();
         }
+        else if (move.equals(this.listMoves.get(3))){
+            atack();
+        }
     }
 
-    public void move(){
+    public void move(Personagem outro){
         if(this.dir == 1 && this.esq == 1){
             this.animation.setFrameIni();
         }
@@ -128,42 +133,52 @@ public class Personagem {
             }
         }
         gravity();
+        this.area.conflito(outro.getArea());
     }
 
     private void move_esq(){
         this.posx -= 5;
+        this.area.moveToEsq(5);
         if(this.posx < 0){
             this.posx = 0;
+            this.area.setQuadrado(posx, posy+tamy, posx+tamx, posy);
         }
     }
 
     private void move_dir(){
         this.posx += 5;
+        this.area.moveToEsq(5);
         if(this.posx > 1000){
             this.posx = 1000;
+            this.area.setQuadrado(posx, posy+tamy, posx+tamx, posy);
         }
     }
 
     public void jump(){
         if(this.posy == this.posyBase){
-            this.dy = 19;
+            this.dy = 22;
         }
     }
 
     public void atack(){
-
+        if(this.whereG == 0){
+            System.out.println("atacou direita");
+        }
+        else{
+            System.out.println("atacou esquerda");
+        }
     }
 
     private void gravity(){
         this.posy += this.dy;
-        this.dy -= 0.6;
+        this.area.moveToUp(this.dy);
+        this.dy -= 0.5;
         if(this.posy < this.posyBase){
             this.posy = this.posyBase;
+            this.area.setQuadrado(posx, posy+tamy, posx+tamx, posy);
             this.dy = 0;
         }
     }
-
-    
 
     // Getters e Setters
     public int getId() { return id; }
@@ -174,6 +189,7 @@ public class Personagem {
     public Map<String, Ataque> getAtaques() { return ataques; }
     public Float getPx() { return this.posx; }
     public Float getPy() { return this.posy; }
+    public Quadrado getArea() { return this.area; }
     public TextureRegion getFrame(){return this.animation.getFrame();}
     public Texture getAvatar(){return this.avatar; }
     
